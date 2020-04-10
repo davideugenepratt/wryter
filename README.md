@@ -17,19 +17,19 @@ This project uses the [GitFlow](https://www.atlassian.com/git/tutorials/comparin
 
 Make sure you have all the following dependencies installed:
 
-    - Node (preferrably installed via [NVM](https://github.com/nvm-sh/nvm))
+    * Node (preferrably installed via [NVM](https://github.com/nvm-sh/nvm))
 
 1) Fork this repository and clone your new repository.
 
 2) Install all packages:
 
-`npm install`
+    - `npm install`
 
 ### Starting a New Feature
 
 1) Find a feature or a bug in the **To Do** column of the [Kanban Board](https://github.com/davideugenepratt/wryter/projects/2) and create a new git branch with the prefix `feature/` from the latest release branch
 
-    - example: `git fetch && git checkout -b feature/1-feature-name`
+    - `git fetch && git checkout -b feature/1-feature-name`
 
 2) Push your branch to your remote and open a PR on the repo from your forked repository and associate that PR with the issue assigned to the feature.
 
