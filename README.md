@@ -7,7 +7,15 @@ Get a random writing prompt every day.
 * Vue
 * Express
 
-## Development Process
+## Contributing
+
+### Slack
+
+The slack channel for the project is: [wryterworkspace.slack.com](https://wryterworkspace.slack.com) send a request to david@davideugenepratt.com to get access to the Slack channel.
+
+### Design
+
+The [Sketch file](https://drive.google.com/file/d/19m6kP4Li3ULqfAKfkQE_u0GOm0OP8N7w/view?usp=sharing) includes wireframes and HiFis (eventually).
 
 ### GitFlow
 
