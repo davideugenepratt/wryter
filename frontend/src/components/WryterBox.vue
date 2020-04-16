@@ -1,11 +1,13 @@
 <template>
-<div id="wryterBox-container">
-    <textarea name="" id="" cols="200" rows="10" style="resize:none"
-    v-model='input' and @keyup='countCharacters()'></textarea>
-    <br/>
-     <span>{{ wordCount }} / {{wordGoal}}</span>
-     <br>
+<div>
+  <div id="wryterBox-container">
+      <span id="word-count-goal">{{ wordCount }} / {{wordGoal}}</span>
+      <br/>
+      <textarea name="" id="" cols="100" rows="10" style="resize:none"
+      v-model='input' and @keyup='countWords()'></textarea>
+  </div>
 </div>
+
 </template>
 
 <script>
@@ -18,9 +20,14 @@ export default {
     };
   },
   methods: {
-    countCharacters() {
+    countWords() {
       this.wordCount = this.input.match(/\w+/g).length;
     },
   },
 };
 </script>
+
+<style scoped>
+
+
+</style>
