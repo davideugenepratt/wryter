@@ -1,0 +1,33 @@
+<template>
+<div>
+  <div id="wryterBox-container">
+      <span id="word-count-goal">{{ wordCount }} / {{wordGoal}}</span>
+      <br/>
+      <textarea name="" id="" cols="100" rows="10" style="resize:none"
+      v-model='input' and @keyup='countWords()'></textarea>
+  </div>
+</div>
+
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      input: '',
+      wordCount: 0,
+      wordGoal: 250,
+    };
+  },
+  methods: {
+    countWords() {
+      this.wordCount = this.input.match(/\w+/g).length;
+    },
+  },
+};
+</script>
+
+<style scoped>
+
+
+</style>
