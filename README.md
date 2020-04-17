@@ -6,6 +6,7 @@ Get a random writing prompt every day.
 
 * Vue
 * Express
+* MongoDB
 
 ## Contributing
 
@@ -26,12 +27,19 @@ This project uses the [GitFlow](https://www.atlassian.com/git/tutorials/comparin
 Make sure you have all the following dependencies installed:
 
     * Node (v10+ preferrably installed via [NVM](https://github.com/nvm-sh/nvm))
+    * MongoDB
 
 1) Fork this repository and clone your new repository.
 
-2) Install all packages:
+2) Install frontend packages and start server:
     - `cd frontend`
     - `npm install`
+    - `npm run start`
+    
+3) Install backend packages and start server:
+    - `cd backend`
+    - `npm install`
+    - `nodemon`
 
 ### Starting a New Feature
 
