@@ -1,6 +1,6 @@
 <template>
 <div>
-  <unsplash-image/>
+  <UnsplashImage />
   <WryterBox />
 </div>
 
