@@ -35,7 +35,11 @@ Make sure you have all the following dependencies installed:
     - `cd frontend'
 =======
     - `cd frontend`
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> e57a109419bc5a753d63f7cb87e8dc6d2f7706de
+>>>>>>> release/0
     - `npm install`
 
 ### Starting a New Feature
