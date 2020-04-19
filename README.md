@@ -27,6 +27,7 @@ This project uses the [GitFlow](https://www.atlassian.com/git/tutorials/comparin
 Make sure you have all the following dependencies installed:
 
     * Node (v10+ preferrably installed via [NVM](https://github.com/nvm-sh/nvm))
+    * Nodemon
     * MongoDB
 
 1) Fork this repository and clone your new repository.
