@@ -41,8 +41,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .unsplash-image-container {
+  display: inline-flex;
+
   img {
     max-width: 100%;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
   }
 }
 </style>
