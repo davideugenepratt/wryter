@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3001 node --inspect=7000 ./bin/www",
+    "start": "PORT=3001 node --inspect=7001 ./bin/www",
     "test": "echo 'No Tests Configured!'"
   },
   "dependencies": {
