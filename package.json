@@ -1,0 +1,25 @@
+{
+  "name": "wryter",
+  "version": "0.0.1",
+  "description": "Get a random writing prompt every day.",
+  "main": "index.js",
+  "scripts": {
+    "install": "npm install --prefix frontend && npm install --prefix backend",
+    "start": "npm run start:frontend & npm run start:backend",
+    "start:frontend": "npm run serve --prefix frontend",
+    "start:backend": "npm run start --prefix backend",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "npm run test --prefix frontend",
+    "test:backend": "npm run test --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davideugenepratt/wryter.git"
+  },
+  "author": "David Eugene Pratt & Cassidy Tillemans",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davideugenepratt/wryter/issues"
+  },
+  "homepage": "https://github.com/davideugenepratt/wryter#readme"
+}
