@@ -70,7 +70,7 @@ export default {
       this.postData();
     },
     postData() {
-      axios.post('http://localhost:3000/auth/register', {
+      axios.post('http://localhost:3001/auth/register', {
         email: this.userEmail,
         password: this.userPassword,
       })

@@ -1,12 +1,13 @@
-var mongoose = require('../../../db');
-var bcrypt = require ('bcryptjs');
-var schema = mongoose.Schema;
+var mongoose = require('../../db');
+var bcrypt = require('bcrypt');
+var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    username: {type:String, unique: true, required: true, dropDups: true},
+    email: {type:String, unique: true, required: true, dropDups: true},
+    password: {type:String, required: true},
 });
 
-var User = module.exports = mongoose.model('User', UserSchema);
+var User = module.exports = mongoose.model('User', userSchema);
 
 module.exports.createUser = function(newUser){
     var promise = new Promise((resolve, reject) => {
@@ -25,12 +26,10 @@ module.exports.createUser = function(newUser){
                             'keyPattern': err.keyPattern,
                             'keyValue': err.keyValue
                         }
-   
                     });
-
                 });
             });
-    });
+         });
     });
     return promise;
 }
