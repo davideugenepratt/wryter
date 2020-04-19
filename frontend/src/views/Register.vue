@@ -55,7 +55,6 @@ export default {
     handleSubmit(e) {
       e.preventDefault();
       this.errors = [];
-      console.log(e);
       if (!this.validateEmail()) {
         this.errors.push('Please enter a valid email.');
       }
@@ -70,6 +69,7 @@ export default {
       this.postData();
     },
     postData() {
+      console.log('calling axios post');
       axios.post('http://localhost:3001/auth/register', {
         email: this.userEmail,
         password: this.userPassword,

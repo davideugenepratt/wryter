@@ -20,7 +20,5 @@
     "passport": "^0.4.1",
     "unsplash-js": "^6.0.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.3"
-  }
+  "devDependencies": {}
 }

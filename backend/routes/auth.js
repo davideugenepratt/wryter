@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../app/user/user-model');
-console.log('test')
+
 /* GET home page. */
 router.post('/register', function(req, res, next) {
   console.log(req.body);
+  console.log('POST');
+  console.log('post2');
+  console.log('test2');
   var user = new User({
     'email': req.body.email,
     'password': req.body.password
@@ -16,7 +19,6 @@ router.post('/register', function(req, res, next) {
     res.status(error.code).json(error);
   });
 });
-
 
 
 
