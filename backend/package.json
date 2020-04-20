@@ -3,12 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-    "start": "PORT=3001 node --inspect ./bin/www"
-=======
     "start": "PORT=3001 node --inspect=7001 ./bin/www",
     "test": "echo 'No Tests Configured!'"
->>>>>>> a4f568fe14c3a17abf829ebd195fb8422be22459
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
