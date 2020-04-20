@@ -62,14 +62,12 @@ export default {
       if (!this.validateConfirmPassword()) {
         this.errors.push('Passwords do not match.');
       }
-
       if (this.errors.length) {
         return;
       }
       this.postData();
     },
     postData() {
-      console.log('calling axios post');
       axios.post('http://localhost:3001/auth/register', {
         email: this.userEmail,
         password: this.userPassword,
