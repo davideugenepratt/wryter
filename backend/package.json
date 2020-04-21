@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "PORT=3001 node --inspect=7001 ./bin/www",
-    "test": "echo 'No Tests Configured!'"
+    "test": "mocha --require babel-register tests/**/*.js --exit"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -21,6 +21,11 @@
     "unsplash-js": "^6.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.1",
     "nodemon": "^2.0.3"
   }
 }
