@@ -2,8 +2,12 @@ var express = require('express');
 var router = express.Router();
 var User = require('../app/user/user-model');
 
-/* GET home page. */
 router.post('/register', function(req, res, next) {
+  console.log(req.body.password);
+
+  if (!validatePassword(req.body.password)){
+    return;
+  }
   var user = new User({
     'email': req.body.email,
     'password': req.body.password
@@ -16,6 +20,11 @@ router.post('/register', function(req, res, next) {
   });
 });
 
+//password validation function ** maybe place in helper file 
+const validatePassword = (password) => {
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}/;
+      return passwordRegex.test(password);
+}
 
 
 module.exports = router;

@@ -42,7 +42,7 @@
 const axios = require('axios');
 
 export default {
-  name: 'Register',
+  name: 'RegisterForm',
   data() {
     return {
       errors: [],
@@ -53,18 +53,25 @@ export default {
   },
   methods: {
     handleSubmit(e) {
+      // prevent from page refresh;
       e.preventDefault();
+      // initialize empty errors string;
       this.errors = [];
+      // validate passwords and email
       if (!this.validateEmail()) {
         this.errors.push('Please enter a valid email.');
       }
-      // vallidate password
-      if (!this.validateConfirmPassword()) {
+      if (!this.validatePassword()) {
+        this.errors.push('Please enter a valid password');
+      }
+
+      if (!this.ConfirmPassword()) {
         this.errors.push('Passwords do not match.');
       }
       if (this.errors.length) {
         return;
       }
+      // post data
       this.postData();
     },
     postData() {
@@ -83,7 +90,12 @@ export default {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(this.userEmail);
     },
-    validateConfirmPassword() {
+    validatePassword() {
+      // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}/;
+      return passwordRegex.test(this.userPassword);
+    },
+    ConfirmPassword() {
       return (this.userConfirmPassword === this.userPassword);
     },
   },
