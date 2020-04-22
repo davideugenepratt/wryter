@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import AuthController from '../../controllers/authController';
+import * as authController from '../../controllers/authController';
 
 export default {
   name: 'RegisterForm',
@@ -49,7 +49,6 @@ export default {
       userEmail: null,
       userPassword: null,
       userConfirmPassword: null,
-      authController: new AuthController(),
     };
   },
   methods: {
@@ -73,7 +72,7 @@ export default {
         return;
       }
       // post data
-      this.authController.postData();
+      authController.postData(this.userEmail, this.userPassword);
     },
     // postData() {
     //   axios.post('http://localhost:3001/auth/register', {
