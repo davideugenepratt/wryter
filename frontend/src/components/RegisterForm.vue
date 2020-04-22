@@ -39,16 +39,17 @@
 </template>
 
 <script>
-const axios = require('axios');
+import AuthController from '../../controllers/authController';
 
 export default {
   name: 'RegisterForm',
   data() {
     return {
       errors: [],
-      userEmail: '',
-      userPassword: '',
-      userConfirmPassword: '',
+      userEmail: null,
+      userPassword: null,
+      userConfirmPassword: null,
+      authController: new AuthController(),
     };
   },
   methods: {
@@ -72,27 +73,27 @@ export default {
         return;
       }
       // post data
-      this.postData();
+      this.authController.postData();
     },
-    postData() {
-      axios.post('http://localhost:3001/auth/register', {
-        email: this.userEmail,
-        password: this.userPassword,
-      })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+    // postData() {
+    //   axios.post('http://localhost:3001/auth/register', {
+    //     email: this.userEmail,
+    //     password: this.userPassword,
+    //   })
+    //     .then((response) => {
+    //       console.log(response);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(this.userEmail);
     },
     validatePassword() {
       // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}/;
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,}/;
       return passwordRegex.test(this.userPassword);
     },
     ConfirmPassword() {

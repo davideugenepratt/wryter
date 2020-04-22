@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../app/user/user-model');
 
 router.post('/register', function(req, res, next) {
-  console.log(req.body.password);
+  console.log(req.body);
 
   if (!validatePassword(req.body.password)){
     return;
