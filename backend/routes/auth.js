@@ -24,6 +24,7 @@ router.post('/register', function(req, res, next) {
     res.status(error.code).json(error);
   });
 });
+};
 
 let login = function(req, res, next) {
   var user = new User({
