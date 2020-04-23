@@ -91,6 +91,34 @@ export default {
       this.wordCount = val === '' ? 0 : val.match(/\w+/g).length;
     },
   },
+  methods: {
+    timer(minutes) {
+      clearInterval(this.countdownInterval);
+      const inputTimeInMilliseconds = minutes * 60000;
+      this.convertMillisecondsToTime(inputTimeInMilliseconds);
+      //  get time now();
+      /*  scrolling/ tabbing away in some browsers
+        stops intervals so we are basing it on Unix time difference */
+      const currentTime = Date.now();
+      const endOfCountdownTime = currentTime + inputTimeInMilliseconds;
+      this.countdownInterval = setInterval(() => {
+        const msRemaining = endOfCountdownTime - Date.now();
+        if (msRemaining <= 0) {
+          clearInterval(this.countdownInterval);
+          return;
+        }
+        this.convertMillisecondsToTime(msRemaining);
+      }, 1000);
+      // set interval for every second
+    },
+    convertMillisecondsToTime(ms) {
+      this.minutesRemaining = this.formatNumberforTimeCode(Math.floor(ms / 60000));
+      this.secondsRemaining = this.formatNumberforTimeCode(Math.round((ms % 60000) / 1000));
+    },
+    formatNumberforTimeCode(number) {
+      return number > 9 ? `${number}` : `0${number}`;
+    },
+  },
 };
 </script>
 
