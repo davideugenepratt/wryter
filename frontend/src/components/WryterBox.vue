@@ -57,7 +57,7 @@ export default {
     wryterText(val) {
       this.wordCount = val === '' ? 0 : val.match(/\w+/g).length;
     },
-  }
+  },
 };
 </script>
 
