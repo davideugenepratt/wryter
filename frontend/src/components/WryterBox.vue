@@ -94,7 +94,6 @@ export default {
   methods: {
     timer(minutes) {
       clearInterval(this.countdownInterval);
-      //  convert minutes to ms
       const inputTimeInMilliseconds = minutes * 60000;
       this.convertMillisecondsToTime(inputTimeInMilliseconds);
       //  get time now();
