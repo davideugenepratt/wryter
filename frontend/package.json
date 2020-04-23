@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-    "serve": "vue-cli-service serve --port 3000",
-=======
     "serve": "vue-cli-service --inspect 7000 --port 3000 serve",
->>>>>>> 249c38f8153909c1470d2f5e5e949e75ae1fbdb0
     "build": "vue-cli-service build",
     "test": "npm run lint && npm run test:unit && npm run test:e2e",
     "test:unit": "vue-cli-service test:unit",
