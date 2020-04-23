@@ -2,7 +2,16 @@ var express = require('express');
 var router = express.Router();
 var User = require('../app/user/user-model');
 
+<<<<<<< Updated upstream
 let register = function(req, res, next) {
+=======
+router.post('/register', function(req, res, next) {
+  if (!validatePassword(req.body.password)){
+    console.error('invalid password');
+    return;
+  }
+
+>>>>>>> Stashed changes
   var user = new User({
     'email': req.body.email,
     'password': req.body.password
@@ -17,6 +26,7 @@ let register = function(req, res, next) {
   });
 };
 
+<<<<<<< Updated upstream
 let login = function(req, res, next) {
   var user = new User({
     'email': req.body.email,
@@ -29,6 +39,14 @@ let login = function(req, res, next) {
     res.status(error.code).json(error);
   });
 };
+=======
+//password validation function. Maybe place in a helper function eventually
+const validatePassword = (password) => {
+  // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,}/;
+  return passwordRegex.test(password);
+}
+>>>>>>> Stashed changes
 
 /* GET home page. */
 router.post('/register', register);

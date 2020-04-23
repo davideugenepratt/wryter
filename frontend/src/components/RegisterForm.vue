@@ -74,18 +74,6 @@ export default {
       // post data
       authController.postData(this.userEmail, this.userPassword);
     },
-    // postData() {
-    //   axios.post('http://localhost:3001/auth/register', {
-    //     email: this.userEmail,
-    //     password: this.userPassword,
-    //   })
-    //     .then((response) => {
-    //       console.log(response);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(this.userEmail);
