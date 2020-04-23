@@ -91,6 +91,7 @@ export default {
       this.wordCount = val === '' ? 0 : val.match(/\w+/g).length;
     },
   },
+<<<<<<< HEAD
   methods: {
     timer(minutes) {
       clearInterval(this.countdownInterval);
@@ -120,6 +121,8 @@ export default {
       return number > 9 ? `${number}` : `0${number}`;
     },
   },
+=======
+>>>>>>> 249c38f8153909c1470d2f5e5e949e75ae1fbdb0
 };
 </script>
 

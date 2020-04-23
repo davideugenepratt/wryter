@@ -3,8 +3,8 @@ var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    email: {type:String, unique: true, required: true, dropDups: true},
-    password: {type:String, required: true},
+    email: {type: String, unique: true, required: true, dropDups: true},
+    password: {type: String, required: true},
 });
 
 var User = module.exports = mongoose.model('User', userSchema);
@@ -17,6 +17,7 @@ module.exports.createUser = function(newUser){
                 var response = newUser.save().then(function(response){
                     resolve({'success': true});
                 }).catch(function(err){
+                    console.log(err);
                     reject({
                         'success':false,
                         'code': 500,
