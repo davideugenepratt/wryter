@@ -2,10 +2,10 @@
   <div>
     <div class="text-center">
       <form @submit="handleSubmit" class="form-signin">
-        <h1 class="mb-3">Registration</h1>
-        <p v-if="errors.length">
-          <b>Please correct the following error(s):</b>
-        </p>
+        <h1 class="mb-3">Login</h1>
+          <p v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+          </p>
         <ul>
           <li :key="error" v-for="error in errors">{{ error }}</li>
         </ul>
@@ -28,18 +28,9 @@
             class="form-control"
             placeholder="Password">
           </div>
-        <div class="form-group">
-          <label for="inputPasswordConfirmation" class="sr-only ">Password</label>
-          <input
-            type="password"
-            v-model="userConfirmPassword"
-            id="inputPasswordConfirmation"
-            class="form-control"
-            placeholder="re-type password">
-        </div>
-        <div class="form-group">
-          <button class="btn btn-lg btn-primary btn-block mt-3">Submit</button>
-        </div>
+          <button class="btn btn-lg btn-primary btn-block mt-3">Login</button>
+
+          <a href="/register" class="btn btn-lg btn-secondary btn-block mt-3">Register</a>
       </form>
     </div>
   </div>
@@ -49,7 +40,7 @@
 import * as authController from '../controllers/authController';
 
 export default {
-  name: 'RegisterForm',
+  name: 'LoginForm',
   data() {
     return {
       errors: [],
@@ -71,15 +62,11 @@ export default {
       if (!this.validatePassword()) {
         this.errors.push('Please enter a valid password');
       }
-
-      if (!this.ConfirmPassword()) {
-        this.errors.push('Passwords do not match.');
-      }
       if (this.errors.length) {
         return;
       }
       // post data
-      authController.register(this.userEmail, this.userPassword);
+      authController.login(this.userEmail, this.userPassword);
     },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -89,9 +76,6 @@ export default {
       // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,}/;
       return passwordRegex.test(this.userPassword);
-    },
-    ConfirmPassword() {
-      return (this.userConfirmPassword === this.userPassword);
     },
   },
 };

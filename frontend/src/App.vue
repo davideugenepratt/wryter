@@ -1,28 +1,20 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div>
+    <header>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <strong>Wryter</strong>
+          </a>
+          <a href="/login" class="text-white">Login</a>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+      <div id="#app" class="d-flex justify-content-center flex-column h-100">
+        <router-view/>
+      </div>
+    </main>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>

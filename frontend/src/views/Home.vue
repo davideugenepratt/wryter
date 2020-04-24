@@ -1,9 +1,8 @@
 <template>
-<div id="#app">
-  <UnsplashImage />
-  <WryterBox />
-</div>
-
+  <div>
+    <UnsplashImage />
+    <WryterBox />
+  </div>
 </template>
 
 <script>
