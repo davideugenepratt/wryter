@@ -52,6 +52,14 @@
             </div>
           </div>
         </div>
+        <div class="progress">
+          <div class="progress-bar"
+          role="progressbar"
+          :style="{width: timerProgress + '%'}"
+          aria-valuenow="50"
+          aria-valuemin="0"
+          aria-valuemax="100"></div>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -83,7 +91,7 @@ export default {
       secondsRemaining: this.formatNumberforTimeCode(0),
       timeSelected: 0,
       countdownInterval: null,
-      timerProgress: 50,
+      timerProgress: 100,
     };
   },
   watch: {
@@ -107,6 +115,8 @@ export default {
           clearInterval(this.countdownInterval);
           return;
         }
+        this.timerProgress = (msRemaining / inputTimeInMilliseconds) * 100;
+        console.log(this.timerProgress);
         this.convertMillisecondsToTime(msRemaining);
       }, 1000);
       // set interval for every second
