@@ -1,18 +1,23 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+var bodyParser = require('body-parser');
 
 // TODO: I really don't like this global use of fetch but the Unsplash SDK needs it. Might be a better wat to include it.
-global.fetch = require("node-fetch");
-require('dotenv').config();
+global.fetch = require('node-fetch');
 
+var User = require('./app/user/userModel');
 
-var indexRouter = require('./routes/index');
-var unsplashRouter = require('./routes/unsplash');
-var authRouter = require('./routes/auth')
+var indexRouter = require('./app/index/indexRouter');
+var unsplashRouter = require('./app/unsplash/unsplashRouter');
+var authRouter = require('./app/auth/authRouter')
 
 var app = express();
 
@@ -27,6 +32,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+
+var JwtStrategy = require('passport-jwt').Strategy,
+    ExtractJwt = require('passport-jwt').ExtractJwt;
+var opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.SECRET || 'warytersecret';
+
+passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+  User.findOne({username: jwt_payload.sub}, function(err, user) {
+    if (err) {
+        return done(err, false);
+    }
+    if (user) {
+        return done(null, user);
+    } else {
+        return done(null, false);
+    }
+  });
+}));
+
+app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/unsplash', unsplashRouter);

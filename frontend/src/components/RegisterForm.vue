@@ -13,7 +13,7 @@
           <label for="inputEmail" class="sr-only">Email Address</label>
           <input
             type="email"
-            v-model="userEmail"
+            v-model="username"
             id="inputEmail"
             class="form-control"
             placeholder="Email address"
@@ -23,7 +23,7 @@
           <label for="inputPassword" class="sr-only ">Password</label>
           <input
             type="password"
-            v-model="userPassword"
+            v-model="password"
             id="inputPassword"
             class="form-control"
             placeholder="Password">
@@ -40,6 +40,9 @@
         <div class="form-group">
           <button class="btn btn-lg btn-primary btn-block mt-3">Submit</button>
         </div>
+        <div class="form-group">
+          <a href="/login" class="btn btn-lg btn-light btn-block mt-3">Cancel</a>
+        </div>
       </form>
     </div>
   </div>
@@ -53,8 +56,8 @@ export default {
   data() {
     return {
       errors: [],
-      userEmail: null,
-      userPassword: null,
+      username: null,
+      password: null,
       userConfirmPassword: null,
     };
   },
@@ -79,19 +82,19 @@ export default {
         return;
       }
       // post data
-      authController.register(this.userEmail, this.userPassword);
+      authController.register(this.username, this.password);
     },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(this.userEmail);
+      return re.test(this.username);
     },
     validatePassword() {
       // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,}/;
-      return passwordRegex.test(this.userPassword);
+      return passwordRegex.test(this.password);
     },
     ConfirmPassword() {
-      return (this.userConfirmPassword === this.userPassword);
+      return (this.userConfirmPassword === this.password);
     },
   },
 };

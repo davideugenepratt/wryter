@@ -1,29 +1,25 @@
 const axios = require('axios').default;
 
-const register = (userEmail, userPassword) => {
+const register = (username, password) => {
   axios.post('http://localhost:3001/auth/register', {
-    email: userEmail,
-    password: userPassword,
-  })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    username,
+    password,
+  }).then((response) => {
+    console.log(response);
+  }).catch((error) => {
+    console.log(error);
+  });
 };
 
-const login = (userEmail, userPassword) => {
+const login = (username, password) => {
   axios.post('http://localhost:3001/auth/login', {
-    email: userEmail,
-    password: userPassword,
-  })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    username,
+    password,
+  }).then((response) => {
+    console.log(response);
+  }).catch((error) => {
+    console.log(error);
+  });
 };
 
 module.exports = {
