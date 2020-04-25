@@ -4,5 +4,24 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to Backend",
+            "port": 7001,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to Frontend",
+            "port": 7000,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+
     ]
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="container wryter-box">
     <div class="row">
-      <div class="col-12 col-md-4 offset-md-8">
+      <div class="col-6 col-md-4 ">
         <div class="word-count-goal d-flex">
           <div class="word-count btn btn-light active">{{ wordCount }}</div>
           <div class="separator">/</div>
@@ -21,6 +21,34 @@
               <button class="dropdown-item" href v-on:click="wordGoal = 500">500</button>
               <button class="dropdown-item" href v-on:click="wordGoal = 1000">1000</button>
               <button class="dropdown-item" href v-on:click="wordGoal = 1500">1500</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 ">
+        <div class="word-count-goal d-flex">
+          <div class="time-remaining btn btn-light active">
+            {{minutesRemaining}} : {{secondsRemaining}}</div>
+          <div class="separator">/</div>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary btn-block dropdown-toggle"
+              type="button"
+              id="dropDownTimerOptions"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropDownTimerOptions">
+              <button class="dropdown-item" href
+                v-on:click="minutesRemaining = 5; timer(minutesRemaining)">5 minutes</button>
+              <button class="dropdown-item" href
+                v-on:click="minutesRemaining = 10; timer(minutesRemaining)">10 minutes</button>
+              <button class="dropdown-item" href
+                v-on:click="minutesRemaining = 15;  timer(minutesRemaining)">15 minutes</button>
+              <button class="dropdown-item" href
+                v-on:click="minutesRemaining = 30; timer(minutesRemaining)">30 minutes</button>
             </div>
           </div>
         </div>
@@ -51,13 +79,46 @@ export default {
       wryterText: '',
       wordCount: 0,
       wordGoal: 250,
+      minutesRemaining: this.formatNumberforTimeCode(0),
+      secondsRemaining: this.formatNumberforTimeCode(0),
+      timeSelected: 0,
+      countdownInterval: null,
+      timerProgress: 50,
     };
   },
   watch: {
     wryterText(val) {
       this.wordCount = val === '' ? 0 : val.match(/\w+/g).length;
     },
-  }
+  },
+  methods: {
+    timer(minutes) {
+      clearInterval(this.countdownInterval);
+      const inputTimeInMilliseconds = minutes * 60000;
+      this.convertMillisecondsToTime(inputTimeInMilliseconds);
+      //  get time now();
+      /*  scrolling/ tabbing away in some browsers
+        stops intervals so we are basing it on Unix time difference */
+      const currentTime = Date.now();
+      const endOfCountdownTime = currentTime + inputTimeInMilliseconds;
+      this.countdownInterval = setInterval(() => {
+        const msRemaining = endOfCountdownTime - Date.now();
+        if (msRemaining <= 0) {
+          clearInterval(this.countdownInterval);
+          return;
+        }
+        this.convertMillisecondsToTime(msRemaining);
+      }, 1000);
+      // set interval for every second
+    },
+    convertMillisecondsToTime(ms) {
+      this.minutesRemaining = this.formatNumberforTimeCode(Math.floor(ms / 60000));
+      this.secondsRemaining = this.formatNumberforTimeCode(Math.round((ms % 60000) / 1000));
+    },
+    formatNumberforTimeCode(number) {
+      return number > 9 ? `${number}` : `0${number}`;
+    },
+  },
 };
 </script>
 
