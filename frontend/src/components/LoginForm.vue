@@ -54,11 +54,10 @@ export default {
   },
   methods: {
     handleSubmit(e) {
-      // prevent from page refresh;
+      const self = this;
+
       e.preventDefault();
-      // initialize empty errors string;
       this.errors = [];
-      // validate passwords and email
       if (!this.validateEmail()) {
         this.errors.push('Please enter a valid email.');
       }
@@ -68,8 +67,14 @@ export default {
       if (this.errors.length) {
         return;
       }
-      // post data
-      authController.login(this.username, this.password);
+
+      authController.login(this.username, this.password).then((response) => {
+        localStorage['wryter/token'] = response.data.token;
+        self.$store.dispatch('login');
+        self.$router.push('/');
+      }, (error) => {
+        console.log('not logged in', error);
+      });
     },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

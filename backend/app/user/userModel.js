@@ -20,7 +20,6 @@ module.exports.createUser = function(newUser){
                 var response = newUser.save().then(function(response){
                     resolve({'success': true});
                 }).catch(function(err){
-                    console.log(err);
                     reject({
                         'success':false,
                         'code': 500,

@@ -17,7 +17,8 @@ var User = require('./app/user/userModel');
 
 var indexRouter = require('./app/index/indexRouter');
 var unsplashRouter = require('./app/unsplash/unsplashRouter');
-var authRouter = require('./app/auth/authRouter')
+var authRouter = require('./app/auth/authRouter');
+var authMiddleware = require('./app/auth/authMiddleware');
 
 var app = express();
 
@@ -56,6 +57,7 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(authMiddleware);
 
 app.use('/', indexRouter);
 app.use('/unsplash', unsplashRouter);
