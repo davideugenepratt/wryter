@@ -10,11 +10,11 @@
           <li :key="error" v-for="error in errors">{{ error }}</li>
         </ul>
         <div class="form-group">
-          <label for="inputEmail" class="sr-only">Email Address</label>
+          <label for="inputUsername" class="sr-only">Email Address</label>
           <input
             type="email"
             v-model="username"
-            id="inputEmail"
+            id="inputUsername"
             class="form-control"
             placeholder="Email address"
             required autofocus>
@@ -38,10 +38,10 @@
             placeholder="re-type password">
         </div>
         <div class="form-group">
-          <button class="btn btn-lg btn-primary btn-block mt-3">Submit</button>
+          <button class="btn btn-lg btn-primary btn-block mt-3" id="submitButton">Submit</button>
         </div>
         <div class="form-group">
-          <a href="/login" class="btn btn-lg btn-light btn-block mt-3">Cancel</a>
+          <a href="/login" class="btn btn-lg btn-light btn-block mt-3" id="cancelButton">Cancel</a>
         </div>
       </form>
     </div>

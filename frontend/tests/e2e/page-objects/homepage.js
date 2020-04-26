@@ -21,7 +21,7 @@ module.exports = {
   // Or a page objects can also have sections
   sections: {
     app: {
-      selector: '#app',
+      selector: '#home-container',
 
       elements: {
         logo: 'textarea',
@@ -30,6 +30,15 @@ module.exports = {
       // - a page object section can also have sub-sections
       // - elements or sub-sections located here are retrieved using the "app" section as the base
       sections: {
+        header: {
+          selector: 'header',
+          elements: {
+            loginText: {
+              selector: '.login-text',
+            },
+          },
+        },
+
         counter: {
           selector: '.word-count-goal',
         },

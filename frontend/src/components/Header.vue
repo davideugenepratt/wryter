@@ -5,8 +5,8 @@
         <a href="/" class="navbar-brand d-flex align-items-center">
           <strong>Wryter</strong>
         </a>
-        <a v-if="loggedIn" href="#" @click="logout" class="text-white">Logout</a>
-        <a v-else href="/login" class="text-white">Login</a>
+        <a v-if="loggedIn" href="#" @click="logout" class="login-text text-white">Logout</a>
+        <a v-else href="/login" class="login-text text-white">Login</a>
       </div>
     </div>
   </header>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="register-container">
     <RegisterForm/>
   </div>
 </template>

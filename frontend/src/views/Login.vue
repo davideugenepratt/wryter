@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column align-items-center">
+  <div id="login-container" class="d-flex flex-column align-items-center">
     <LoginForm/>
   </div>
 </template>

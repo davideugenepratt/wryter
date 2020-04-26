@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
   unsplash.photos.getRandomPhoto({ orientation: "landscape" })
   .then(toJson)
   .then(json => {
-    console.debug('Unsplash response: ', json);
     res.json(json);
   });
   

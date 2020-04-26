@@ -13,11 +13,11 @@
           <li :key="error" v-for="error in errors">{{ error }}</li>
         </ul>
         <div class="form-group">
-          <label for="inputEmail" class="sr-only">Email Address</label>
+          <label for="inputUsername" class="sr-only">Email Address</label>
           <input
             type="email"
             v-model="username"
-            id="inputEmail"
+            id="inputUsername"
             class="form-control"
             placeholder="Email address"
             required autofocus>
@@ -32,9 +32,9 @@
             placeholder="Password">
         </div>
         <div class="form-group">
-          <button class="btn btn-lg btn-primary btn-block mt-3">Login</button>
+          <button class="btn btn-lg btn-primary btn-block mt-3" id="loginButton">Login</button>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="registerButton">
           <a href="/register" class="btn btn-lg btn-secondary btn-block mt-3">Register</a>
         </div>
       </form>

@@ -5,6 +5,7 @@ node_js:
   - 10
 services:
   - xvfb
+  - mongodb
 addons:
     chrome: stable
 before_install:
