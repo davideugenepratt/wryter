@@ -3,6 +3,9 @@
     <div class="text-center">
       <form @submit="handleSubmit" class="form-signin">
         <h1 class="mb-3">Login</h1>
+        <div v-if="responseError" class="alert alert-danger" role="alert">
+          There was a problem logging in. Please check your username and password and try again.
+        </div>
         <p v-if="errors.length">
           <b>Please correct the following error(s):</b>
         </p>
@@ -46,6 +49,7 @@ export default {
   name: 'LoginForm',
   data() {
     return {
+      responseError: null,
       errors: [],
       username: null,
       password: null,
@@ -57,23 +61,12 @@ export default {
       const self = this;
 
       e.preventDefault();
-      this.errors = [];
-      if (!this.validateEmail()) {
-        this.errors.push('Please enter a valid email.');
-      }
-      if (!this.validatePassword()) {
-        this.errors.push('Please enter a valid password');
-      }
-      if (this.errors.length) {
-        return;
-      }
-
       authController.login(this.username, this.password).then((response) => {
         localStorage['wryter/token'] = response.data.token;
         self.$store.dispatch('login');
         self.$router.push('/');
-      }, (error) => {
-        console.log('not logged in', error);
+      }, () => {
+        this.responseError = true;
       });
     },
     validateEmail() {
