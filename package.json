@@ -10,7 +10,7 @@
     "start:backend": "npm run start --prefix backend",
     "start:backend:test": "npm run start:test --prefix backend",
     "test": "npm run test:frontend && npm run test:backend",
-    "test:frontend": "trap 'kill -9 %1; kill -9 %2' EXIT & npm run start:backend:test & npm run test --prefix frontend",
+    "test:frontend": "trap 'kill %1; kill %2' EXIT & (npm run start:backend:test & npm run test --prefix frontend)",
     "test:backend": "npm run test --prefix backend"
   },
   "repository": {

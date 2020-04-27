@@ -59,7 +59,6 @@ export default {
   methods: {
     handleSubmit(e) {
       const self = this;
-
       e.preventDefault();
       authController.login(this.username, this.password).then((response) => {
         localStorage['wryter/token'] = response.data.token;
@@ -68,15 +67,6 @@ export default {
       }, () => {
         this.responseError = true;
       });
-    },
-    validateEmail() {
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(this.username);
-    },
-    validatePassword() {
-      // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,}/;
-      return passwordRegex.test(this.password);
     },
   },
 };
