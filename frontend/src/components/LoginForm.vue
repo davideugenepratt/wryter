@@ -64,6 +64,7 @@ export default {
         localStorage['wryter/token'] = response.data.token;
         self.$store.dispatch('login');
         self.$router.push('/');
+        console.log(self.$store.state);
       }, () => {
         this.responseError = true;
       });

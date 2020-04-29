@@ -18,7 +18,7 @@ const login = (username, password) => {
       username,
       password,
     }).then((response) => {
-      localStorage.jwt = response.data.token;
+      localStorage['wryter/token'] = response.data.token;
       resolve(response);
     }, (error) => {
       reject(error);

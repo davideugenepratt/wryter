@@ -3,21 +3,41 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import LoginForm from '@/components/LoginForm.vue';
 import moxios from 'moxios';
+import store from '@/store';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('LoginForm.vue', () => {
-  let store;
+  const localStorageMock = () => {
+    const storage = {};
+    return {
+      setItem(key, value) {
+        storage[key] = value || '';
+      },
+      getItem(key) {
+        return key in storage ? storage[key] : null;
+      },
+      removeItem(key) {
+        delete storage[key];
+      },
+      getLength() {
+        return Object.keys(storage).length;
+      },
+      key(i) {
+        const keys = Object.keys(storage);
+        return keys[i] || null;
+      },
+    };
+  };
+
+  const $router = {
+    push: () => {},
+  };
 
   beforeEach(() => {
     moxios.install();
-
-    store = new Vuex.Store({
-      state: {
-        loggedIn: false,
-      },
-    });
+    global.localStorage = localStorageMock();
   });
 
   afterEach(() => {
@@ -36,6 +56,9 @@ describe('LoginForm.vue', () => {
       store,
       localVue,
       attachToDocument: true,
+      mocks: {
+        $router,
+      },
     });
 
     wrapper.setData({ username: 'testuser@test.com', password: 'StrongPassword1*' });
@@ -45,7 +68,6 @@ describe('LoginForm.vue', () => {
 
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
-
       request.respondWith({
         status: 200,
         response: {
@@ -54,6 +76,7 @@ describe('LoginForm.vue', () => {
         },
       }).then(() => {
         wrapper.vm.$nextTick();
+        console.log(store.state.loggedIn);
         expect(store.state.loggedIn).to.equal(true);
         done();
       });
