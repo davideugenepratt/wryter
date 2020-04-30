@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "start": "PORT=3001 nodemon --inspect=7001 ./bin/www",
-    "start:test": "PORT=3001 node  --inspect=7001 ./bin/www",
     "test": "echo 'No Tests Configured!'"
   },
   "dependencies": {

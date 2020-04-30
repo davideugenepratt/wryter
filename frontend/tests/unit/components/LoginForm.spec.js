@@ -76,7 +76,6 @@ describe('LoginForm.vue', () => {
         },
       }).then(() => {
         wrapper.vm.$nextTick();
-        console.log(store.state.loggedIn);
         expect(store.state.loggedIn).to.equal(true);
         done();
       });
