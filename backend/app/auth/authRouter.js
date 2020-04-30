@@ -5,19 +5,24 @@ var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
 let register = function(req, res, next) {
+  console.log('test1234');
   if (!validatePassword(req.body.password)){
     console.error('invalid password');
     return;
   }
 
+  console.log('test1234a');
   var user = new User({
     'username': req.body.username,
     'password': req.body.password
   });
   
+  console.log('test1234b');
   var result = User.createUser(user).then(function(response){
+    console.log('test1234b', response);
     res.json(response);
   }).catch(function(error){
+    console.log('test1234c');
     console.log(error);
     res.status(error.code).json(error);
   });
