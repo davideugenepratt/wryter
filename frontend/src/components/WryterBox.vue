@@ -1,5 +1,5 @@
 <template>
-  <div class="container wryter-box">
+  <div class="wryter-box container">
     <div class="row">
       <div class="col-6 col-md-4 ">
         <div class="word-count-goal d-flex">
@@ -134,7 +134,6 @@ export default {
 
 <style scoped lang="scss">
   .wryter-box.container {
-    margin-top: -120px;
 
     .word-count-goal {
       background: #FFF;
