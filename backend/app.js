@@ -21,7 +21,9 @@ var authRouter = require('./app/auth/authRouter');
 var authMiddleware = require('./app/auth/authMiddleware');
 
 var app = express();
-
+app.get('/unsplash/', function (req, res) {
+  res.send('hello world');
+})
 app.use(cors());
 
 // view engine setup
@@ -58,9 +60,7 @@ app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/unsplash/', function (req, res) {
-  res.send('hello world');
-})
+
 
 app.use(authMiddleware);
 
