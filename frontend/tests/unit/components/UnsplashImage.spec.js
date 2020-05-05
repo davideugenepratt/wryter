@@ -31,6 +31,7 @@ describe('UnsplashImage.vue', () => {
       });
     });
     */
+    expect(true).to.equal(true);
     done();
   });
 });
