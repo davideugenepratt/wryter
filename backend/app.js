@@ -39,7 +39,7 @@ var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.SECRET || 'warytersecret';
+opts.secretOrKey = process.env.SECRET || 'wrytersecret';
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
   User.findOne({username: jwt_payload.sub}, function(err, user) {

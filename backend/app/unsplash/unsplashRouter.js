@@ -7,6 +7,7 @@ const unsplash = new Unsplash({ accessKey: "{APP_ACCESS_KEY}" });
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  res.json({message: true});
   const unsplash = new Unsplash({
     accessKey: process.env.UNSPLASH_ACCESS_KEY,
     secret: process.env.UNSPLASH_SECRET,
