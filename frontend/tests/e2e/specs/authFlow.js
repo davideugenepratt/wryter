@@ -31,12 +31,16 @@ module.exports = {
     form.click('@submit');
 
     browser.getLog('browser', function(logEntriesArray) {
-      console.log('Log length: ' + logEntriesArray.length);
+      if (logEntriesArray.length) {
+        console.log('Log length: ' + logEntriesArray.length);
         logEntriesArray.forEach(function(log) {
-            console.log('[' + log.level + '] ' + log.timestamp + ' : ' + log.message);
+          console.log(
+            '[' + log.level + '] ' + log.timestamp + ' : ' + log.message
+          );
         });
+      }
     });
-    
+
     browser.end();
   },
 

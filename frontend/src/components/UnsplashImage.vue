@@ -30,13 +30,13 @@ export default {
       const self = this;
       axios.get('http://localhost:3001/unsplash')
         .then((response) => {
-          console.log('test3442323a', response);
+          console.log('test3442323a', response); // eslint-disable-line no-use-before-define
           self.loading = false;
           self.imageUrl = response.data.urls.full;
-        },(response) => {
-          console.log('test3442323b', response);
+        }, (response) => {
+          console.log('test3442323b', response); // eslint-disable-line no-use-before-define
         }).catch((response) => {
-          console.log('test3442323c', response);
+          console.log('test3442323c', response); // eslint-disable-line no-use-before-define
         });
     },
   },
