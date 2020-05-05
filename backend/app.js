@@ -26,6 +26,14 @@ app.get('/unsplash/', function (req, res) {
   res.json({success: true});
 });
 
+app.post('/auth/register', function (req, res) {
+  res.json({success: true});
+});
+
+app.post('/auth/login', function (req, res) {
+  res.json({success: true});
+});
+
 app.use(cors());
 
 // view engine setup
@@ -62,13 +70,11 @@ app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 app.use(authMiddleware);
 
 app.use('/', indexRouter);
 // app.use('/unsplash', unsplashRouter);
-app.use('/auth', authRouter);
+//app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
