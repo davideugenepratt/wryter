@@ -30,8 +30,14 @@ export default {
       const self = this;
       axios.get('http://localhost:3001/unsplash')
         .then((response) => {
+          console.log('test453434', response);
           self.loading = false;
           self.imageUrl = response.data.urls.full;
+        },
+        (response) => {
+          console.log('test453434a', response);
+        }).catch((response) => {
+          console.log('test453434b', response);
         });
     },
   },
