@@ -57,10 +57,15 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/unsplash/', function (req, res) {
+  res.send('hello world');
+})
+
 app.use(authMiddleware);
 
 app.use('/', indexRouter);
-app.use('/unsplash', unsplashRouter);
+// app.use('/unsplash', unsplashRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
