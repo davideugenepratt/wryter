@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var debug = require('debug')('wryter:server');
 var cors = require('cors');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -20,19 +21,9 @@ var unsplashRouter = require('./app/unsplash/unsplashRouter');
 var authRouter = require('./app/auth/authRouter');
 var authMiddleware = require('./app/auth/authMiddleware');
 
+debug(unsplashRouter, authRouter);
+
 var app = express();
-
-app.get('/unsplash/', function (req, res) {
-  res.json({success: true});
-});
-
-app.post('/auth/register', function (req, res) {
-  res.json({success: true});
-});
-
-app.post('/auth/login', function (req, res) {
-  res.json({success: true});
-});
 
 app.use(cors());
 
@@ -51,7 +42,7 @@ var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.SECRET || 'wrytersecret';
+opts.secretOrKey = process.env.SECRET || 'warytersecret';
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
   User.findOne({username: jwt_payload.sub}, function(err, user) {
@@ -69,12 +60,11 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(authMiddleware);
 
 app.use('/', indexRouter);
-// app.use('/unsplash', unsplashRouter);
-//app.use('/auth', authRouter);
+app.use('/unsplash', unsplashRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
