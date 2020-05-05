@@ -21,9 +21,11 @@ var authRouter = require('./app/auth/authRouter');
 var authMiddleware = require('./app/auth/authMiddleware');
 
 var app = express();
+
 app.get('/unsplash/', function (req, res) {
-  res.send('hello world');
-})
+  res.json({success: true});
+});
+
 app.use(cors());
 
 // view engine setup
