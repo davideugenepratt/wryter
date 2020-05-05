@@ -29,6 +29,14 @@ module.exports = {
     form.setValue('@password', testPassword);
     form.setValue('@passwordConfirm', testPassword);
     form.click('@submit');
+
+    browser.getLog('browser', function(logEntriesArray) {
+      console.log('Log length: ' + logEntriesArray.length);
+        logEntriesArray.forEach(function(log) {
+            console.log('[' + log.level + '] ' + log.timestamp + ' : ' + log.message);
+        });
+    });
+    
     browser.end();
   },
 

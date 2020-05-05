@@ -4,7 +4,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var debug = require('debug')('wryter:server');
 var cors = require('cors');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -20,8 +19,6 @@ var indexRouter = require('./app/index/indexRouter');
 var unsplashRouter = require('./app/unsplash/unsplashRouter');
 var authRouter = require('./app/auth/authRouter');
 var authMiddleware = require('./app/auth/authMiddleware');
-
-debug(unsplashRouter, authRouter);
 
 var app = express();
 
