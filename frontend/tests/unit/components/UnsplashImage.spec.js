@@ -1,21 +1,20 @@
 import { expect } from 'chai';
-// import { shallowMount } from '@vue/test-utils';
-// import UnsplashImage from '@/components/UnsplashImage.vue';
-// import moxios from 'moxios';
+import { shallowMount } from '@vue/test-utils';
+import UnsplashImage from '@/components/UnsplashImage.vue';
+import moxios from 'moxios';
 
 describe('UnsplashImage.vue', () => {
   beforeEach(() => {
-    // moxios.install();
+    moxios.install();
   });
 
   afterEach(() => {
-    // moxios.uninstall();
+    moxios.uninstall();
   });
 
   it('Renders image form unsplash when called', (done) => {
-    // const wrapper = shallowMount(UnsplashImage);
-    // const imageUrl = 'test';
-    /*
+    const wrapper = shallowMount(UnsplashImage);
+    const imageUrl = 'test';
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -30,8 +29,5 @@ describe('UnsplashImage.vue', () => {
         done();
       });
     });
-    */
-    expect(true).to.equal(true);
-    done();
   });
 });
