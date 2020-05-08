@@ -12,7 +12,8 @@ require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var unsplashRouter = require('./routes/unsplash');
-var authRouter = require('./routes/auth')
+var authRouter = require('./routes/auth');
+var writingsRouter = require('./routes/writing.route');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/unsplash', unsplashRouter);
 app.use('/auth', authRouter);
+app.use('/writings', writingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
