@@ -9,6 +9,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var debug = require('debug')('wryter:server');
 
 // TODO: I really don't like this global use of fetch but the Unsplash SDK needs it. Might be a better wat to include it.
 global.fetch = require('node-fetch');
@@ -70,6 +71,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  debug(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
