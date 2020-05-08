@@ -32,9 +32,7 @@ let login = function(req, res, next) {
   }).catch(function(error) {
     res.status(error.code).json(error);
   });
-  
-}
-
+};
 //password validation function. Maybe place in a helper function eventually
 const validatePassword = (password) => {
   // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
