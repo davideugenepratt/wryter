@@ -1,5 +1,5 @@
 <template>
-  <div class="container wryter-box">
+  <div class="wryter-box container">
     <div class="row">
       <div class="col-6 col-md-4 ">
         <div class="word-count-goal d-flex">
@@ -52,6 +52,14 @@
             </div>
           </div>
         </div>
+        <div class="progress">
+          <div class="progress-bar"
+          role="progressbar"
+          :style="{width: timerProgress + '%'}"
+          aria-valuenow="50"
+          aria-valuemin="0"
+          aria-valuemax="100"></div>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -83,7 +91,7 @@ export default {
       secondsRemaining: this.formatNumberforTimeCode(0),
       timeSelected: 0,
       countdownInterval: null,
-      timerProgress: 50,
+      timerProgress: 100,
     };
   },
   watch: {
@@ -107,6 +115,8 @@ export default {
           clearInterval(this.countdownInterval);
           return;
         }
+        this.timerProgress = (msRemaining / inputTimeInMilliseconds) * 100;
+        console.log(this.timerProgress);
         this.convertMillisecondsToTime(msRemaining);
       }, 1000);
       // set interval for every second
@@ -124,7 +134,6 @@ export default {
 
 <style scoped lang="scss">
   .wryter-box.container {
-    margin-top: -120px;
 
     .word-count-goal {
       background: #FFF;
