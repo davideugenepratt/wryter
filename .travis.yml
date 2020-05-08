@@ -10,5 +10,5 @@ addons:
   chrome: stable
 before_install:
   - export CHROME_BIN=chromium-browser
-after_script
+after_script:
   - curl -vLk http://localhost:3001/auth/register
