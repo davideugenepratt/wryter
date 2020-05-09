@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "PORT=3001 nodemon --inspect=7001 ./bin/www",
+    "start:test": "DEBUG=express:* PORT=3001 node --inspect=7001 ./bin/www",
     "test": "echo 'No Tests Configured!'"
   },
   "dependencies": {
@@ -15,10 +16,12 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.9",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.0",
     "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
     "unsplash-js": "^6.0.0"
   },
   "devDependencies": {}

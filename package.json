@@ -8,8 +8,9 @@
     "start": "npm run start:frontend & npm run start:backend",
     "start:frontend": "npm run serve --prefix frontend",
     "start:backend": "npm run start --prefix backend",
+    "start:backend:test": "npm run start:test --prefix backend",
     "test": "npm run test:frontend && npm run test:backend",
-    "test:frontend": "npm run test --prefix frontend",
+    "test:frontend": "trap 'kill %1; echo killed' ERR EXIT; npm run start:backend:test & npm run test --prefix frontend",
     "test:backend": "npm run test --prefix backend"
   },
   "repository": {
@@ -21,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/davideugenepratt/wryter/issues"
   },
-  "homepage": "https://github.com/davideugenepratt/wryter#readme"
+  "homepage": "https://github.com/davideugenepratt/wryter#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express-session": "^1.17.1",
+    "passport-local": "^1.0.0"
+  }
 }

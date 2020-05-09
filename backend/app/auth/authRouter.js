@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 
 let register = function(req, res, next) {
   res.json({success: true});
+  console.log(req.body)
   if (!validatePassword(req.body.password)){
     console.error('invalid password');
     return;
@@ -33,13 +34,8 @@ let login = function(req, res, next) {
   }).catch(function(error) {
     res.status(error.code).json(error);
   });
-<<<<<<< HEAD:backend/routes/auth.js
-};
-=======
   
-}
-
->>>>>>> 4e1d4e94d2f432ab791d2ab5926bab67ecb54d7d:backend/app/auth/authRouter.js
+};
 //password validation function. Maybe place in a helper function eventually
 const validatePassword = (password) => {
   // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
