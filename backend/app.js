@@ -13,7 +13,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 var unsplashRouter = require('./routes/unsplash');
 var authRouter = require('./routes/auth');
-var writingsRouter = require('./routes/writing.route');
+var writingsRouter = require('./routes/writingRoute');
 
 var app = express();
 

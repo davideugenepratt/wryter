@@ -1,14 +1,10 @@
-const mongoose = require('../../db')
-const Schema = mongoose.Schema
+var mongoose = require('../../db');
+var Schema = mongoose.Schema;
 
-const writingSchema = new Schema({
-    writing: {type: String, required:true}
-    // TODO add the following properties to the schema to track metrics
-    // image 
-    // timer length
-    // word goal length
+var writingSchema = new Schema({
+    writing: String
 });
 
-const Writing = mongoose.model('Writing', writingSchema);
-module.exports = Writing;
+var Writing = module.exports = mongoose.model('Writing', writingSchema);
+
 
