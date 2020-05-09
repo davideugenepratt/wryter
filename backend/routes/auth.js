@@ -4,8 +4,6 @@ var User = require('../app/user/user-model');
 
 
 let register = function(req, res, next) {
-
-
   if (!validatePassword(req.body.password)){
     console.error('invalid password');
     return;
