@@ -1,40 +1,35 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../app/user/user-model');
-
+var User = require('../user/userModel');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
 
 let register = function(req, res, next) {
-
-router.post('/register', function(req, res, next) {
   if (!validatePassword(req.body.password)){
     console.error('invalid password');
     return;
   }
 
   var user = new User({
-    'email': req.body.email,
+    'username': req.body.username,
     'password': req.body.password
   });
   
   var result = User.createUser(user).then(function(response){
-    let test = '';
+    console.log(response);
     res.json(response);
   }).catch(function(error){
-    let test = '';
     res.status(error.code).json(error);
   });
-});
 };
 
 let login = function(req, res, next) {
-  var user = new User({
-    'email': req.body.email,
-    'password': req.body.password
-  });
+  var username = req.body.username;
+  var password = req.body.password; 
   
-  var result = User.login(user).then(function(response){
+  var result = User.login(username, password).then(function(response){
     res.json(response);
-  }).catch(function(error){
+  }).catch(function(error) {
     res.status(error.code).json(error);
   });
 };

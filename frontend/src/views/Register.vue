@@ -1,7 +1,7 @@
 <template>
-<div>
-<RegisterForm/>
-</div>
+  <div id="register-container">
+    <RegisterForm/>
+  </div>
 </template>
 
 <script>
