@@ -63,14 +63,17 @@
 
 <script>
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 export default {
   name: 'TourGuide',
   mounted() {
-    console.log('test342323');
-    $('#tourGuideModal').modal();
-    $('#tourGuideModal').modal('show');
-    $('.carousel').carousel();
+    if (!Cookies.get('wryterTourGuide')) {
+      $('#tourGuideModal').modal();
+      $('#tourGuideModal').modal('show');
+      $('.carousel').carousel();
+      Cookies.set('wryterTourGuide', true);
+    }
   },
 };
 </script>
