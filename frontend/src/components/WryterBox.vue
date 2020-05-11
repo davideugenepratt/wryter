@@ -98,7 +98,7 @@ export default {
   watch: {
     // ** TODO this needs to be updated to look for and ignore the claculation on blank lines
     wryterText(val) {
-      this.wordCount = val === ''  ? 0 : val.match(/\w+/g).length;
+      this.wordCount = (!/\S/.test(val) || val === '0') ? 0 : val.match(/\w+/g).length;
     },
   },
   methods: {
