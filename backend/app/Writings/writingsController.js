@@ -2,7 +2,6 @@
 let Writing = require('./writingsModel');
 
 let createWriting = function(req, res) {
-  console.log(req.body);
   const newWriting = new Writing({
       writing: req.body.writing,
   });
@@ -11,8 +10,48 @@ let createWriting = function(req, res) {
       res.send("writing saved to database");
       })
       .catch(err => {
-      res.status(400).send("unable to save to database");
+        res.status(err.code).json(err);
       });
   };
 
-  module.exports={createWriting};
+  let getAllWritings = function(req, res){
+      Writing.find()
+     .then(items =>{
+        res.send(items)
+        })  
+    .catch((err) => {
+        res.status(err.code).json(err);
+    })
+  };
+
+  let getWriting = function(req, res){
+      const id= req.params.id;
+      Writing.findById(id)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(err.code).json(err);
+        });
+  };
+
+  let editWriting = function( req, res){
+    const id = req.params.id;
+    Writing.findOneAndUpdate(id, req.body,{useFindAndModify: false})
+    .then(item => {
+     res.send(item);
+      })
+      .catch(err => {
+        res.status(err.code).json(err);
+      });
+  };
+
+  let deleteWriting = function(req, res) {
+    Writing.findByIdAndRemove(req.params.id, (err, user) => {
+        res.json({success: true, message: "writing deleted.", user})
+      });
+    };
+
+
+
+  module.exports={createWriting, getAllWritings,getWriting, editWriting, deleteWriting};
