@@ -71,6 +71,7 @@
               rows="10"
               placeholder="There's nothing worse than a blank page ..."
               v-model='wryterText'
+              v-on:input='updateTextAreaHeight'
               >
             </textarea>
           </div>
@@ -95,8 +96,9 @@ export default {
     };
   },
   watch: {
+    // ** TODO this needs to be updated to look for and ignore the claculation on blank lines
     wryterText(val) {
-      this.wordCount = val === '' ? 0 : val.match(/\w+/g).length;
+      this.wordCount = val === ''  ? 0 : val.match(/\w+/g).length;
     },
   },
   methods: {
@@ -128,6 +130,12 @@ export default {
     formatNumberforTimeCode(number) {
       return number > 9 ? `${number}` : `0${number}`;
     },
+    updateTextAreaHeight(event) {
+      const el = event.currentTarget;
+      el.style.height = 'inherit';
+      el.style.height = `${el.scrollHeight}px`;
+    },
+
   },
 };
 </script>
