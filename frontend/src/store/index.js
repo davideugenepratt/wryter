@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Cookies from 'js-cookie';
 
 Vue.use(Vuex);
 
@@ -12,7 +13,7 @@ export default new Vuex.Store({
       state.loggedIn = true;
     },
     logout(state) {
-      localStorage.removeItem('wryter/token');
+      Cookies.remove('wryter-token');
       state.loggedIn = false;
     },
   },

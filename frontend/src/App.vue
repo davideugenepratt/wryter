@@ -19,3 +19,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+#app {
+  padding-top: 55px;
+}
+</style>

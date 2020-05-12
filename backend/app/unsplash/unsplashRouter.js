@@ -20,9 +20,7 @@ router.get('/', function(req, res, next) {
   .then(json => {
     res.json(json);
   });
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
   
   
 });

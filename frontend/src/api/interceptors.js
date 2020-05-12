@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import authController from '../controllers/authController';
+import AuthHelper from '../helpers/authHelper';
 
 export default () => {
   axios.interceptors.response.use((response) => response,
@@ -12,7 +12,7 @@ export default () => {
     });
 
   axios.interceptors.request.use((request) => {
-    const token = authController.getToken();
+    const token = AuthHelper.getToken();
     const newRequest = request;
     if (token) {
       newRequest.headers.Authorization = token;
