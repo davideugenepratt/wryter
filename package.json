@@ -4,9 +4,9 @@
   "description": "Get a random writing prompt every day.",
   "main": "index.js",
   "scripts": {
-    "buil": "npm build --prefix frontend",
+    "build": "npm build --prefix frontend",
     "install": "npm install --prefix frontend && npm install --prefix backend",
-    "start": "npm install --prefix frontend && npm install --prefix backend",
+    "start": "npm run start:production --prefix backend",
     "start:both": "npm run start:backend",
     "start:frontend": "npm run serve --prefix frontend",
     "start:backend": "npm run start --prefix backend",
