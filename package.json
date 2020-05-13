@@ -4,7 +4,7 @@
   "description": "Get a random writing prompt every day.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build --prefix frontend",
+    "build": "cd frontend && ./node_modules/.bin/vue-cli-service build",
     "install": "npm install --prefix frontend && npm install --prefix backend",
     "start": "npm run start:production --prefix backend",
     "start:both": "npm run start:backend",
