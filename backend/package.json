@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "PORT=3001 nodemon --inspect=7001 ./bin/www",
-    "start:production": "PORT=3001 node ./bin/www",
-    "start:test": "DEBUG=express:* PORT=3001 node --inspect=7001 ./bin/www",
+    "start:production": "node ./bin/www",
+    "start:test": "DEBUG=express: PORT=3001 node --inspect=7001 ./bin/www",
     "test": "echo 'No Tests Configured!'"
   },
   "dependencies": {
