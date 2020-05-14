@@ -7,7 +7,7 @@
     "build": "cd frontend && ./node_modules/.bin/vue-cli-service build",
     "install": "npm install --prefix frontend && npm install --prefix backend",
     "start": "npm run start:production --prefix backend",
-    "start:both": "npm run start:backend",
+    "start:dev": "npm run start:backend & npm run start:frontend",
     "start:frontend": "npm run serve --prefix frontend",
     "start:backend": "npm run start --prefix backend",
     "start:backend:test": "npm run start:test --prefix backend",

@@ -28,7 +28,8 @@ export default {
     fetchData() {
       this.loading = true;
       const self = this;
-      axios.get('http://localhost:3001/unsplash')
+      console.log('test');
+      axios.get(`${process.env.VUE_APP_API_ROOT}/unsplash`)
         .then((response) => {
           self.loading = false;
           self.imageUrl = response.data.urls.full;

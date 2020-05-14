@@ -60,9 +60,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(authMiddleware);
 
-app.use('/', indexRouter);
-app.use('/unsplash', unsplashRouter);
-app.use('/auth', authRouter);
+app.use('/api/unsplash', unsplashRouter);
+app.use('/api/auth', authRouter);
+app.use(express.static('../frontend/dist'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
