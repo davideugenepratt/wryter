@@ -10,6 +10,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var debug = require('debug')('wryter:server');
+var history = require('connect-history-api-fallback');
 
 // TODO: I really don't like this global use of fetch but the Unsplash SDK needs it. Might be a better wat to include it.
 global.fetch = require('node-fetch');
@@ -39,8 +40,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(opts.secretOrKey));
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyParser.json());
+
+var staticMiddleware = express.static(path.join(__dirname, 'public'));
+
+app.use(staticMiddleware);
+app.use(history());
+app.use(staticMiddleware);
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
   User.findOne({username: jwt_payload.sub}, function(err, user) {

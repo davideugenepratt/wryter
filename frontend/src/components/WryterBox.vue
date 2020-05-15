@@ -165,6 +165,10 @@ export default {
       }
     }
 
+    .progress {
+      display: none;
+    }
+
     .wryter-box-textarea {
       padding: 30px;
     }
