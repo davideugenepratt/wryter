@@ -28,7 +28,6 @@ export default {
     fetchData() {
       this.loading = true;
       const self = this;
-      console.log('test');
       axios.get(`${process.env.VUE_APP_API_ROOT}/unsplash`)
         .then((response) => {
           self.loading = false;

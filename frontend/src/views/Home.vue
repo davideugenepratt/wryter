@@ -29,7 +29,6 @@ export default {
       const value = $(window).scrollTop();
       const windowHeight = $(window).height();
       $('.wryter-box').css('top', `${(windowHeight - 250) - value * 0.5}px`);
-      console.log(`${value}px from top`);
       // $('.wryter-box').css();
       //  todo base 500 value on window height and adjust accordingly to that
       //  might have to recalculate with change in window size
