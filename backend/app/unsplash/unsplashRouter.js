@@ -8,30 +8,24 @@ const unsplash = new Unsplash({ accessKey: "{APP_ACCESS_KEY}" });
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   try {
-  const unsplash = new Unsplash({
-    accessKey: process.env.UNSPLASH_ACCESS_KEY,
-    secret: process.env.UNSPLASH_SECRET,
-    callbackUrl: process.env.UNSPLASH_CALLBACK_URL,
-    timeout: 500
-  });
+    const unsplash = new Unsplash({
+      accessKey: process.env.UNSPLASH_ACCESS_KEY,
+      secret: process.env.UNSPLASH_SECRET,
+      callbackUrl: process.env.UNSPLASH_CALLBACK_URL,
+      timeout: 500
+    });
 
-  unsplash.photos.getRandomPhoto({ orientation: "landscape" })
-  .then(toJson)
-  .then(json => {
-    res.json(json);
-  });
-<<<<<<< HEAD
-  } catch (e) {}
-  
-  
-=======
+    unsplash.photos.getRandomPhoto({ orientation: "landscape" })
+    .then(toJson)
+    .then(json => {
+      res.json(json);
+    });
   } catch (e) {
     res.status(500).json({
       success: false,
       message: 'Error retrieving photo',
     });
   }
->>>>>>> origin/release/0
 });
 
 module.exports = router;
