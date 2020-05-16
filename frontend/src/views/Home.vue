@@ -24,7 +24,6 @@ export default {
   },
   mounted() {
     // need to set initial height of writer box before it loads
-    //
     $(window).on('scroll resize', () => {
       const value = $(window).scrollTop();
       const windowHeight = $(window).height();

@@ -20,9 +20,18 @@ router.get('/', function(req, res, next) {
   .then(json => {
     res.json(json);
   });
+<<<<<<< HEAD
   } catch (e) {}
   
   
+=======
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: 'Error retrieving photo',
+    });
+  }
+>>>>>>> origin/release/0
 });
 
 module.exports = router;
