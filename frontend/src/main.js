@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import App from './App.vue';
+import VueGtm from 'vue-gtm';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import interceptors from './api/interceptors';
+
+
 
 interceptors();
 
