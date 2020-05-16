@@ -4,14 +4,17 @@
   "description": "Get a random writing prompt every day.",
   "main": "index.js",
   "scripts": {
+    "build": "cd frontend && ./node_modules/.bin/vue-cli-service build",
     "install": "npm install --prefix frontend && npm install --prefix backend",
-    "start": "npm run start:frontend & npm run start:backend",
+    "start": "npm run start:production --prefix backend",
+    "start:dev": "npm run start:backend & npm run start:frontend",
     "start:frontend": "npm run serve --prefix frontend",
     "start:backend": "npm run start --prefix backend",
     "start:backend:test": "npm run start:test --prefix backend",
     "test": "npm run test:frontend && npm run test:backend",
     "test:frontend": "trap 'kill %1; echo killed' ERR EXIT; npm run start:backend:test & npm run test --prefix frontend",
-    "test:backend": "npm run test --prefix backend"
+    "test:backend": "npm run test --prefix backend",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap --prefix frontend && npm run build"
   },
   "repository": {
     "type": "git",
@@ -24,8 +27,7 @@
   },
   "homepage": "https://github.com/davideugenepratt/wryter#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express-session": "^1.17.1",
-    "passport-local": "^1.0.0"
+    "@vue/cli": "^4.3.1",
+    "nodemon": "^2.0.3"
   }
 }
