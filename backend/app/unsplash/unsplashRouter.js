@@ -21,10 +21,11 @@ router.get('/', function(req, res, next) {
     res.json(json);
   });
   } catch (e) {
-    console.log(e);
+    res.status(500).json({
+      success: false,
+      message: 'Error retrieving photo',
+    });
   }
-  
-  
 });
 
 module.exports = router;
