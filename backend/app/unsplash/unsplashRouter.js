@@ -7,6 +7,7 @@ const unsplash = new Unsplash({ accessKey: "{APP_ACCESS_KEY}" });
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  try {
   const unsplash = new Unsplash({
     accessKey: process.env.UNSPLASH_ACCESS_KEY,
     secret: process.env.UNSPLASH_SECRET,
@@ -17,10 +18,14 @@ router.get('/', function(req, res, next) {
   unsplash.photos.getRandomPhoto({ orientation: "landscape" })
   .then(toJson)
   .then(json => {
-    console.debug('Unsplash response: ', json);
     res.json(json);
   });
-  
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      message: 'Error retrieving photo',
+    });
+  }
 });
 
 module.exports = router;
