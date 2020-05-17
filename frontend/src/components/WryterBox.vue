@@ -64,7 +64,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <form>
+        <form @submit="handleSubmit">
           <div class="form-group">
             <textarea
               class="form-control form-control-lg wryter-box-textarea"
@@ -73,6 +73,7 @@
               v-model='wryterText'
               >
             </textarea>
+            <button class="btn btn-lg btn-primary">Save Wryting</button>
           </div>
         </form>
       </div>
@@ -81,6 +82,8 @@
 </template>
 
 <script>
+import * as writingController from '../controllers/writingController';
+
 export default {
   data() {
     return {
@@ -100,6 +103,11 @@ export default {
     },
   },
   methods: {
+    handleSubmit(e) {
+      e.preventDefault();
+      console.log(this.wryterText);
+      writingController.saveWriting(this.wryterText);
+    },
     timer(minutes) {
       clearInterval(this.countdownInterval);
       const inputTimeInMilliseconds = minutes * 60000;
