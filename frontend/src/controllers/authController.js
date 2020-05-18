@@ -2,7 +2,7 @@ const axios = require('axios').default;
 const jwt = require('jsonwebtoken');
 
 const register = (username, password) => {
-  axios.post('http://localhost:3001/auth/register', {
+  axios.post(`${process.env.VUE_APP_API_ROOT}/auth/register`, {
     username,
     password,
   });
@@ -10,7 +10,7 @@ const register = (username, password) => {
 
 const login = (username, password) => {
   const promise = new Promise((resolve, reject) => {
-    axios.post('http://localhost:3001/auth/login', {
+    axios.post(`${process.env.VUE_APP_API_ROOT}/auth/login`, {
       username,
       password,
     }).then((response) => {
