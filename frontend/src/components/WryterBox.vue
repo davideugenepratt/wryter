@@ -117,7 +117,6 @@ export default {
           return;
         }
         this.timerProgress = (msRemaining / inputTimeInMilliseconds) * 100;
-        console.log(this.timerProgress);
         this.convertMillisecondsToTime(msRemaining);
       }, 1000);
       // set interval for every second
