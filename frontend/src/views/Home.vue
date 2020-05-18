@@ -23,15 +23,16 @@ export default {
     };
   },
   mounted() {
-    // need to set initial height of writer box before it loads
-    //
+    // TODO add ui to the image that suggests that it's clickable to toggle full screen
+    // and add close button to page when clicked
+    $('.unsplash-image-container').on('click', () => {
+      $('.wryter-box').toggleClass('hidden');
+      $('.unsplash-image-container').toggleClass('full-screen');
+    });
     $(window).on('scroll resize', () => {
       const value = $(window).scrollTop();
       const windowHeight = $(window).height();
       $('.wryter-box').css('top', `${(windowHeight - 250) - value * 0.5}px`);
-      // $('.wryter-box').css();
-      //  todo base 500 value on window height and adjust accordingly to that
-      //  might have to recalculate with change in window size
     });
     $(window).trigger('scroll');
   },
@@ -44,10 +45,22 @@ body{
 }
 .unsplash-image-container{
   position: relative;
+  transition: all .5s;
 }
-.wryter-box{
+.unsplash-image-container.full-screen{
+  transform: scale(1.2);
+  position: relative;
+  transition: all .5s;
+}
+.wryter-box {
   position: absolute;
   left:50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
+  transition: scale, opacity .5s;
+  opacity: 1
+}
+.wryter-box.hidden{
+  transition: scale, opacity .5s;
+  opacity: 0;
 }
 </style>

@@ -35,3 +35,9 @@ export default {
   },
 };
 </script>
+<style lang="css">
+.navbar{
+  z-index: 1;
+}
+
+</style>
