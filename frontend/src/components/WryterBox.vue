@@ -74,7 +74,7 @@
               v-on:input='updateTextAreaHeight'
               >
             </textarea>
-            <button class="btn btn-lg btn-primary">Save Wryting</button>
+            <button class="btn btn-secondary">Save Wryting</button>
           </div>
         </form>
       </div>
