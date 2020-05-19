@@ -9,6 +9,7 @@ var passport = require('passport');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var debug = require('debug')('wryter:server');
+var history = require('connect-history-api-fallback');
 
 // TODO: I really don't like this global use of fetch but the Unsplash SDK needs it. Might be a better wat to include it.
 global.fetch = require('node-fetch');
@@ -24,6 +25,16 @@ var writingsRouter = require('./routes/writingRoute');
 
 
 var app = express();
+
+if(process.env.HTTPS_ENABLED === 'true') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    } else {
+      next();
+    }
+  });
+}
 
 app.use(cors());
 
@@ -41,8 +52,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(opts.secretOrKey));
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyParser.json());
+
+var staticMiddleware = express.static(path.join(__dirname, '../frontend/dist'));
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
   User.findOne({username: jwt_payload.sub}, function(err, user) {
@@ -62,10 +75,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(authMiddleware);
 
-app.use('/', indexRouter);
-app.use('/unsplash', unsplashRouter);
-app.use('/auth', authRouter);
-app.use('/writings', writingsRouter);
+app.use(staticMiddleware);
+app.use(history());
+app.use('/api/unsplash', unsplashRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/writings', writingsRouter);
+app.use(staticMiddleware);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
