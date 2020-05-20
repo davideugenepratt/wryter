@@ -1,7 +1,7 @@
 <template>
   <div class="wryter-box container">
     <div class="row">
-      <div class="col-6 col-md-4 ">
+      <div class="col-6 col-lg-4">
         <div class="word-count-goal d-flex">
           <div class="word-count btn btn-light active">{{ wordCount }}</div>
           <div class="separator">/</div>
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-4 ">
+      <div class="col-6 col-lg-4">
         <div class="word-count-goal d-flex">
           <div class="time-remaining btn btn-light active">
             {{minutesRemaining}} : {{secondsRemaining}}</div>
@@ -125,7 +125,6 @@ export default {
           return;
         }
         this.timerProgress = (msRemaining / inputTimeInMilliseconds) * 100;
-        console.log(this.timerProgress);
         this.convertMillisecondsToTime(msRemaining);
       }, 1000);
       // set interval for every second
@@ -178,6 +177,10 @@ export default {
         cursor: normal;
         font-weight: bold;
       }
+    }
+
+    .progress {
+      display: none;
     }
 
     .wryter-box-textarea {

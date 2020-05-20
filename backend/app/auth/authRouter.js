@@ -18,7 +18,6 @@ let register = function(req, res, next) {
   });
   
   var result = User.createUser(user).then(function(response){
-    console.log(response);
     res.json(response);
   }).catch(function(error){
     res.status(error.code).json(error);
