@@ -3,7 +3,7 @@
     <div class="navbar-header">
       <div class="navbar-brand">
         <a href="/">
-          <img src="#" srcset="style/images/logo.png 1x, style/images/logo@2x.png 2x" alt="" />
+          <img src="#" srcset="images/logo.png 1x, style/images/logo@2x.png 2x" alt="" />
         </a>
       </div>
       <div class="nav-bars-wrapper">

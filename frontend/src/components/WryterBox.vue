@@ -1,5 +1,7 @@
 <template>
   <div class="wryter-box container">
+    <!-- Commenting this out for now since it's not really necessary for the MVP -->
+    <!--
     <div class="row">
       <div class="col-6 col-lg-4">
         <div class="word-count-goal d-flex">
@@ -62,6 +64,7 @@
         </div>
       </div>
     </div>
+    -->
     <div class="row">
       <div class="col-12">
         <form>
@@ -170,6 +173,11 @@ export default {
 
     .wryter-box-textarea {
       padding: 30px;
+      border: none;
+
+      &:focus {
+        background: #FFF;
+      }
     }
   }
 </style>

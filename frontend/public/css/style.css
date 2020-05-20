@@ -1137,7 +1137,6 @@ blockquote .meta {
 }
 main {
 	position: relative;
-	overflow-x: hidden;
 	-webkit-transition: -webkit-transform 0.4s;
 	-moz-transition: -moz-transform 0.4s;
 	transition: transform 0.4s;
@@ -3392,9 +3391,7 @@ textarea {
 	}
 	.navbar .navbar-collapse {
 	    float: right;
-	    position: relative;
-	    left: -50%;
-	    /* or right 50% */
+	    margin-right: 70px;
 	    text-align: left;
 	}
 	.navbar .navbar-nav {

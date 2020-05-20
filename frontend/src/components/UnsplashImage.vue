@@ -1,42 +1,34 @@
 <template>
-  <div class="rev_slider_wrapper">
-    <div id="slider1" class="rev_slider" data-version="5.0">
-      <ul>
-        <li data-transition="parallaxtoright" data-fstransition="fade">
-          <div class="unsplash-image-container">
-            <picture>
-              <source media="(max-width: 400px)" v-bind:srcset="imageUrls.small">
-              <source media="(max-width: 1080px)" v-bind:srcset="imageUrls.regular">
-              <img v-bind:src="imageUrls.full" />
-            </picture>
+  <div class="unsplash-image-container">
+    <picture>
+      <source media="(max-width: 400px)" v-bind:srcset="imageUrls.small">
+      <source media="(max-width: 1080px)" v-bind:srcset="imageUrls.regular">
+      <img v-bind:src="imageUrls.full" />
+    </picture>
 
-            <a class="image-credit"
-              v-tooltip:left="imageCredit.username"
-              v-bind:href="imageCredit.url"
-              target="_blank"
-            >
-              <svg
-                class="bi bi-image-fill"
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M.002 3a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2h-12a2 2 0 01-2-2V3zm1
-                    9l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71a.5.5 0 01.577-.094L15.002
-                    9.5V13a1 1 0 01-1 1h-12a1 1 0 01-1-1v-1zm5-6.5a1.5 1.5 0 11-3 0 1.5 1.5 0
-                    013 0z"
-                    clip-rule="evenodd"
-                />
-              </svg>
-            </a>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <a class="image-credit"
+      v-tooltip:left="imageCredit.username"
+      v-bind:href="imageCredit.url"
+      target="_blank"
+    >
+      <svg
+        class="bi bi-image-fill"
+        width="1em"
+        height="1em"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M.002 3a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2h-12a2 2 0 01-2-2V3zm1
+            9l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71a.5.5 0 01.577-.094L15.002
+            9.5V13a1 1 0 01-1 1h-12a1 1 0 01-1-1v-1zm5-6.5a1.5 1.5 0 11-3 0 1.5 1.5 0
+            013 0z"
+            clip-rule="evenodd"
+        />
+      </svg>
+    </a>
   </div>
 </template>
 
@@ -118,7 +110,7 @@ img {
 
 .image-credit {
   position: absolute;
-  top: 10px;
+  top: 90px;
   right: 10px;
   height: 30px;
   width: 30px;
