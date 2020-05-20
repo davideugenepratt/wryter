@@ -891,7 +891,8 @@ blockquote .meta {
     height: 32px;
     font-size: 0;
     text-indent: -9999px;
-    margin: 0 auto;
+    float: right;
+    margin-right: 30px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

@@ -60,7 +60,8 @@
           </li>
           <li><a href="contact.html">Contact</a></li>
           -->
-          <li><a href="#!">Features <span class="caret"></span></a>
+          <li>
+            <a href="#!">Features <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="elements.html">Elements</a></li>
               <li><a href="headings.html">Headings</a></li>

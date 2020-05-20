@@ -70,7 +70,7 @@
         <form>
           <div class="form-group">
             <textarea
-              class="form-control form-control-lg wryter-box-textarea"
+              class="form-control form-control-lg wryter-box-textarea lead"
               rows="10"
               placeholder="There's nothing worse than a blank page ..."
               v-model='wryterText'
@@ -174,6 +174,7 @@ export default {
     .wryter-box-textarea {
       padding: 30px;
       border: none;
+      border-radius: 0;
 
       &:focus {
         background: #FFF;

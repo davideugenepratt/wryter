@@ -111,7 +111,7 @@ img {
 .image-credit {
   position: absolute;
   top: 90px;
-  right: 10px;
+  right: 30px;
   height: 30px;
   width: 30px;
   background: rgba(255,255,255,.5);
