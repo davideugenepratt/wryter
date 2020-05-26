@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import $ from 'jquery';
-
 const axios = require('axios').default;
 
 export default {
@@ -79,17 +77,6 @@ export default {
         });
     },
   },
-  directives: {
-    tooltip: {
-      update: (el, binding) => {
-        $(el).tooltip({
-          title: binding.value,
-          placement: binding.arg,
-          trigger: 'hover',
-        });
-      },
-    },
-  },
 };
 </script>
 
@@ -104,6 +91,8 @@ img {
 
 .unsplash-image-container {
   position: relative;
+  max-height: calc(100vh - 100px);
+  overflow: visible;
 }
 
 .image-credit {
