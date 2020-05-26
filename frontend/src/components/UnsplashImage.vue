@@ -7,8 +7,6 @@
     </picture>
 
     <a class="image-credit"
-      v-tooltip:left="imageCredit.username"
-      v-bind:href="imageCredit.url"
       target="_blank"
     >
       <svg
