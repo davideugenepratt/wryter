@@ -25,7 +25,6 @@ export default {
   mounted() {
     $(window).on('scroll resize', () => {
       const value = $(window).scrollTop();
-      console.log($('.unsplash-image-container').height(), value);
       $('.wryter-box').css('margin-top', `${Math.floor((value * -0.5) - 100)}px`);
     });
     $(window).trigger('scroll');
