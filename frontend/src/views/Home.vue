@@ -23,20 +23,22 @@ export default {
     };
   },
   mounted() {
-    // need to set initial height of writer box before it loads
     $(window).on('scroll resize', () => {
-      const imageHeight = $('.unsplash-image-container img').height();
       const value = $(window).scrollTop();
-      console.log($('.unsplash-image-container img'), imageHeight, value);
-      $('.wryter-box').css('margin-top', `${value * -0.5}px`);
+      console.log($('.unsplash-image-container').height(), value);
+      $('.wryter-box').css('margin-top', `${Math.floor((value * -0.5) - 100)}px`);
     });
     $(window).trigger('scroll');
   },
 };
 </script>
 <style scoped lang="scss">
-  body{
+  body {
     transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  #home-container {
+    background: #1e1e1e;
   }
 
   .wryter-box{

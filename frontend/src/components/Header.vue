@@ -17,10 +17,18 @@
     <div class="nav-wrapper">
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li v-if="loggedIn">
-            <a href="#!">Welcome <span class="caret"></span></a>
+          <li v-if="loggedIn" class="dropdown">
+            <a href
+              class="dropdown-toggle welcome-link"
+              data-toggle="dropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Welcome <span class="caret"></span>
+            </a>
             <ul class="dropdown-menu">
-              <li><a href="#" @click="logout">Logout</a></li>
+              <li><a href @click="logout" class="login-text">Logout</a></li>
             </ul>
           </li>
           <li v-else><a href="/login">Login</a></li>

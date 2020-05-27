@@ -15,7 +15,7 @@ module.exports = {
 
   // A page object can have elements
   elements: {
-    appContainer: '#app',
+    appContainer: '#home-container',
   },
 
   // Or a page objects can also have sections

@@ -52,8 +52,9 @@ module.exports = {
     form.click('@login');
 
     homePage.waitForElementVisible('@appContainer');
-
-    header.expect.element('@loginText').text.to.equal('Logout');
+    header.click('@welcomeLink');
+    header.waitForElementVisible('@loginText');
+    header.expect.element('@loginText').text.to.equal('LOGOUT');
 
     browser.end();
   },
