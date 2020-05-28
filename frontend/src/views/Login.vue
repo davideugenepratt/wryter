@@ -12,3 +12,14 @@ export default {
   components: { LoginForm },
 };
 </script>
+
+<style lang="scss">
+  #login-container {
+    padding-top: 75px;
+  }
+
+  .form-signin {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+</style>

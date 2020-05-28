@@ -82,15 +82,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-img {
-  object-fit: cover;
-  margin: 0 auto;
-}
+
 
 .unsplash-image-container {
   position: relative;
   height: 100vh;
   overflow: visible;
+
+  picture {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+  }
 }
 
 .image-credit {

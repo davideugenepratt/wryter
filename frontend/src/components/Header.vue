@@ -2,7 +2,7 @@
   <div class="navbar navbar-default default" role="navigation">
     <div class="navbar-header">
       <div class="navbar-brand">
-        <a href="/">
+        <a href ="/" @click="home">
           Wryter
         </a>
       </div>
@@ -31,7 +31,7 @@
               <li><a href @click="logout" class="login-text">Logout</a></li>
             </ul>
           </li>
-          <li v-else><a href="/login">Login</a></li>
+          <li v-else><a href="/login" @click="login">Login</a></li>
         </ul>
       </div>
     </div>
@@ -56,7 +56,15 @@ export default {
   methods: {
     logout(e) {
       e.preventDefault();
-      this.$store.dispatch('logout');
+      this.$store.dispatch('/logout');
+    },
+    login(e) {
+      e.preventDefault();
+      this.$router.push('/login');
+    },
+    home(e) {
+      e.preventDefault();
+      this.$router.push('/');
     },
   },
 };
