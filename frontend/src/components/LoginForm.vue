@@ -60,8 +60,7 @@ export default {
     handleSubmit(e) {
       const self = this;
       e.preventDefault();
-      authController.login(this.username, this.password).then((response) => {
-        localStorage['wryter/token'] = response.data.token;
+      authController.login(this.username, this.password).then(() => {
         self.$store.dispatch('login');
         self.$router.push('/');
       }, () => {

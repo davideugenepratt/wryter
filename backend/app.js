@@ -16,10 +16,13 @@ global.fetch = require('node-fetch');
 
 var User = require('./app/user/userModel');
 
+
 var indexRouter = require('./app/index/indexRouter');
 var unsplashRouter = require('./app/unsplash/unsplashRouter');
 var authRouter = require('./app/auth/authRouter');
 var authMiddleware = require('./app/auth/authMiddleware');
+var writingsRouter = require('./routes/writingRoute');
+
 
 var app = express();
 
@@ -76,6 +79,7 @@ app.use(staticMiddleware);
 app.use(history());
 app.use('/api/unsplash', unsplashRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/writings', writingsRouter);
 app.use(staticMiddleware);
 
 // catch 404 and forward to error handler
