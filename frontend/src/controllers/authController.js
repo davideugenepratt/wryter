@@ -2,10 +2,18 @@ const axios = require('axios').default;
 const jwt = require('jsonwebtoken');
 
 const register = (username, password) => {
-  axios.post(`${process.env.VUE_APP_API_ROOT}/auth/register`, {
-    username,
-    password,
+  const promise = new Promise((resolve, reject) => {
+    axios.post(`${process.env.VUE_APP_API_ROOT}/auth/register`, {
+      username,
+      password,
+    }).then(() => {
+      resolve();
+    }, () => {
+      reject();
+    });
   });
+
+  return promise;
 };
 
 const login = (username, password) => {

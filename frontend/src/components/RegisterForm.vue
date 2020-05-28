@@ -7,7 +7,10 @@
           <b>Please correct the following error(s):</b>
         </p>
         <ul>
-          <li :key="error" v-for="error in errors">{{ error }}</li>
+          <div :key="error" v-for="error in errors" class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ error }}
+          </div>
         </ul>
         <div class="form-group">
           <label for="inputUsername" class="sr-only">Email Address</label>
@@ -63,6 +66,7 @@ export default {
   },
   methods: {
     handleSubmit(e) {
+      const self = this;
       // prevent from page refresh;
       e.preventDefault();
       // initialize empty errors string;
@@ -71,6 +75,7 @@ export default {
       if (!this.validateEmail()) {
         this.errors.push('Please enter a valid email.');
       }
+
       if (!this.validatePassword()) {
         this.errors.push('Please enter a valid password');
       }
@@ -78,11 +83,18 @@ export default {
       if (!this.ConfirmPassword()) {
         this.errors.push('Passwords do not match.');
       }
+
       if (this.errors.length) {
         return;
       }
-      // post data
-      authController.register(this.username, this.password);
+
+      authController.register(this.username, this.password).then(() => {
+        authController.login(this.username, this.password).then(() => {
+          self.$router.push('/');
+        });
+      }, () => {
+        this.errors.push('There was a problem logging in, please check your username and password.');
+      });
     },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
