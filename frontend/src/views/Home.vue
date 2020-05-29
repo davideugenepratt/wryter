@@ -45,8 +45,28 @@ export default {
   #home-container {
     background: #1e1e1e;
   }
-
-  .wryter-box{
-    position: relative;
+  .unsplash-image-container.full-screen{
+  transform: scale(1.2);
+  position: relative;
+  transition: all .5s;
+    :hover{
+      cursor: zoom-out;
+    }
+}
+.unsplash-image-container{
+  position: relative;
+  transition: all .5s;
+  :hover{
+    cursor: zoom-in;
   }
+}
+  .wryter-box {
+  position: relative;
+  transition: scale, opacity .5s;
+  opacity: 1
+}
+.wryter-box.hidden{
+  transition: scale, opacity .5s;
+  opacity: 0;
+}
 </style>
