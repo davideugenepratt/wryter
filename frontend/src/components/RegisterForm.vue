@@ -90,6 +90,7 @@ export default {
 
       authController.register(this.username, this.password).then(() => {
         authController.login(this.username, this.password).then(() => {
+          self.$store.dispatch('login');
           self.$router.push('/');
         });
       }, () => {
@@ -101,7 +102,6 @@ export default {
       return re.test(this.username);
     },
     validatePassword() {
-      // password requires 1 lowercase, 1 uppercase, 1 digit and 1 special character
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,}/;
       return passwordRegex.test(this.password);
     },
