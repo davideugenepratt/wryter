@@ -11,6 +11,9 @@
 
 module.exports = {
   elements: {
+    welcomeLink: {
+      selector: '.welcome-link',
+    },
     loginText: {
       selector: '.login-text',
     },
