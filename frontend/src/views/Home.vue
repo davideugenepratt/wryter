@@ -31,36 +31,22 @@ export default {
     });
     $(window).on('scroll resize', () => {
       const value = $(window).scrollTop();
-      const windowHeight = $(window).height();
-      $('.wryter-box').css('top', `${(windowHeight - 250) - value * 0.5}px`);
+      $('.wryter-box').css('margin-top', `${Math.floor((value * -0.5) - 100)}px`);
     });
     $(window).trigger('scroll');
   },
 };
 </script>
-<style>
-body{
-  height: 1000px;
-  transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.unsplash-image-container{
-  position: relative;
-  transition: all .5s;
-}
-.unsplash-image-container.full-screen{
-  transform: scale(1.2);
-  position: relative;
-  transition: all .5s;
-}
-.wryter-box {
-  position: absolute;
-  left:50%;
-  transform: translateX(-50%);
-  transition: scale, opacity .5s;
-  opacity: 1
-}
-.wryter-box.hidden{
-  transition: scale, opacity .5s;
-  opacity: 0;
-}
+<style scoped lang="scss">
+  body {
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  #home-container {
+    background: #1e1e1e;
+  }
+
+  .wryter-box{
+    position: relative;
+  }
 </style>
