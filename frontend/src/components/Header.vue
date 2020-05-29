@@ -56,11 +56,11 @@ export default {
   methods: {
     logout(e) {
       e.preventDefault();
-      this.$store.dispatch('/logout');
+      this.$store.dispatch('logout');
     },
     login(e) {
       e.preventDefault();
-      this.$router.push('/login');
+      this.$router.push('login');
     },
     home(e) {
       e.preventDefault();
