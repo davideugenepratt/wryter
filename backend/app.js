@@ -77,9 +77,11 @@ app.use(authMiddleware);
 
 app.use(staticMiddleware);
 app.use(history());
+app.use('/api/writings', writingsRouter)
 app.use('/api/unsplash', unsplashRouter);
 app.use('/api/auth', authRouter);
 app.use(staticMiddleware);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
