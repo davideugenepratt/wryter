@@ -32,6 +32,8 @@ export default {
     $(window).on('scroll resize', () => {
       const value = $(window).scrollTop();
       $('.wryter-box').css('margin-top', `${Math.floor((value * -0.5) - 100)}px`);
+      const windowHeight = $(window).height();
+      $('.wryter-box').css('top', `${(windowHeight - 250) - value * 0.5}px`);
     });
     $(window).trigger('scroll');
   },
