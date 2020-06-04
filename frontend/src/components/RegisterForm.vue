@@ -35,7 +35,7 @@
             v-model="userConfirmPassword"
             id="inputPasswordConfirmation"
             class="form-control"
-            placeholder="re-type password">
+            placeholder="Confirm password">
         </div>
         <div class="form-group">
           <button class="btn btn-lg btn-primary btn-block mt-3" id="submitButton">Submit</button>
