@@ -15,7 +15,9 @@ export default () => {
     const token = AuthHelper.getToken();
     const newRequest = request;
     if (token) {
-      newRequest.headers.Authorization = token;
+      newRequest.headers.Accept = 'application/json';
+      newRequest.headers['Content-Type'] = 'application/json';
+      newRequest.headers.Authorization = `Bearer ${token}`;
     }
     return newRequest;
   });

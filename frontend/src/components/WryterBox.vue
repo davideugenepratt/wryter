@@ -11,6 +11,16 @@
               v-model='wryterText'
               >
             </textarea>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control input-lg lead wryter-box-title"
+              placeholder="Now just add a title ..."
+              v-model='wryterTitle'
+            />
+          </div>
+          <div class="form-group">
             <button class="btn btn-secondary">Save Wryting</button>
           </div>
         </form>
@@ -23,9 +33,15 @@
 import * as writingController from '../controllers/writingController';
 
 export default {
+  computed: {
+    loggedIn() {
+      return this.$store.state.loggedIn;
+    },
+  },
   data() {
     return {
       wryterText: '',
+      wryterTitle: '',
       wordCount: 0,
       wordGoal: 250,
       minutesRemaining: this.formatNumberforTimeCode(0),
@@ -43,16 +59,16 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      console.log(this.wryterText);
-      writingController.saveWriting(this.wryterText);
+      writingController.saveWriting(
+        this.wryterText,
+        this.wryterTitle,
+        this.$store.state.unsplashResponse,
+      );
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);
       const inputTimeInMilliseconds = minutes * 60000;
       this.convertMillisecondsToTime(inputTimeInMilliseconds);
-      //  get time now();
-      /*  scrolling/ tabbing away in some browsers
-        stops intervals so we are basing it on Unix time difference */
       const currentTime = Date.now();
       const endOfCountdownTime = currentTime + inputTimeInMilliseconds;
       this.countdownInterval = setInterval(() => {
@@ -64,7 +80,6 @@ export default {
         this.timerProgress = (msRemaining / inputTimeInMilliseconds) * 100;
         this.convertMillisecondsToTime(msRemaining);
       }, 1000);
-      // set interval for every second
     },
     convertMillisecondsToTime(ms) {
       this.minutesRemaining = this.formatNumberforTimeCode(Math.floor(ms / 60000));
@@ -122,6 +137,12 @@ export default {
       &:focus {
         background: #FFF;
       }
+    }
+
+    .wryter-box-title {
+      background: #FFF;
+      font-size: 28px;
+      height: 65px;
     }
   }
 </style>

@@ -74,6 +74,7 @@ export default {
             username: response.data.user.username,
             url: response.data.user.links.html,
           };
+          this.$store.dispatch('unsplashResponse', response.data);
         });
     },
   },

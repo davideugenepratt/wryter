@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     loggedIn: false,
+    unsplashResponse: {},
   },
   mutations: {
     login(state) {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
       Cookies.remove('wryter-token');
       state.loggedIn = false;
     },
+    unsplashResponse(state, payload) {
+      state.unsplashResponse = payload.unsplashResponse;
+    },
   },
   actions: {
     login(context) {
@@ -23,6 +27,11 @@ export default new Vuex.Store({
     },
     logout(context) {
       context.commit('logout');
+    },
+    unsplashResponse(context, unsplashResponse) {
+      context.commit('unsplashResponse', {
+        unsplashResponse,
+      });
     },
   },
   modules: {

@@ -5,7 +5,7 @@ import AuthHelper from '../helpers/authHelper';
 import Home from '../views/Home.vue';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
-import Writings from '../views/Writings.vue';
+import Dashboard from '../views/Dashboard.vue';
 
 Vue.use(VueRouter);
 
@@ -26,9 +26,9 @@ const routes = [
     component: Login,
   },
   {
-    path: '/writings',
-    name: 'Writings',
-    component: Writings,
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
     meta: {
       requiresAuth: true,
     },

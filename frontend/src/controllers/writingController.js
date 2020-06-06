@@ -1,8 +1,14 @@
 const axios = require('axios').default;
 
-//  Todo add date, timer data and wordgoal to the wryter schema and to the post method
-const saveWriting = (writing) => {
-  axios.post('http://localhost:3001/writings/create', { writing });
+const saveWriting = (text, title, unsplashResponse) => {
+  axios.post(
+    `${process.env.VUE_APP_API_ROOT}/writing/`,
+    {
+      text,
+      title,
+      unsplashResponse,
+    },
+  );
 };
 
 module.exports = {

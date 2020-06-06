@@ -28,6 +28,7 @@
               Welcome <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+              <li><a href @click="dashboard" class="login-text">Dashboard</a></li>
               <li><a href @click="logout" class="login-text">Logout</a></li>
             </ul>
           </li>
@@ -58,6 +59,10 @@ export default {
     home(e) {
       e.preventDefault();
       this.$router.push('/');
+    },
+    dashboard(e) {
+      e.preventDefault();
+      this.$router.push('/dashboard');
     },
   },
 };
