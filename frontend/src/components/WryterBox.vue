@@ -1,73 +1,11 @@
 <template>
   <div class="wryter-box container">
     <div class="row">
-      <div class="col-6 col-md-4 ">
-        <div class="word-count-goal d-flex">
-          <div class="word-count btn btn-light active">{{ wordCount }}</div>
-          <div class="separator">/</div>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary btn-block dropdown-toggle"
-              type="button"
-              id="wordGoalDropdownButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              {{ wordGoal }}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="wordGoalDropdownButton">
-              <button class="dropdown-item" href v-on:click="wordGoal = 250">250</button>
-              <button class="dropdown-item" href v-on:click="wordGoal = 500">500</button>
-              <button class="dropdown-item" href v-on:click="wordGoal = 1000">1000</button>
-              <button class="dropdown-item" href v-on:click="wordGoal = 1500">1500</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-md-4 ">
-        <div class="word-count-goal d-flex">
-          <div class="time-remaining btn btn-light active">
-            {{minutesRemaining}} : {{secondsRemaining}}</div>
-          <div class="separator">/</div>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary btn-block dropdown-toggle"
-              type="button"
-              id="dropDownTimerOptions"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropDownTimerOptions">
-              <button class="dropdown-item" href
-                v-on:click="minutesRemaining = 5; timer(minutesRemaining)">5 minutes</button>
-              <button class="dropdown-item" href
-                v-on:click="minutesRemaining = 10; timer(minutesRemaining)">10 minutes</button>
-              <button class="dropdown-item" href
-                v-on:click="minutesRemaining = 15;  timer(minutesRemaining)">15 minutes</button>
-              <button class="dropdown-item" href
-                v-on:click="minutesRemaining = 30; timer(minutesRemaining)">30 minutes</button>
-            </div>
-          </div>
-        </div>
-        <div class="progress">
-          <div class="progress-bar"
-          role="progressbar"
-          :style="{width: timerProgress + '%'}"
-          aria-valuenow="50"
-          aria-valuemin="0"
-          aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-12">
         <form @submit="handleSubmit">
           <div class="form-group">
             <textarea
-              class="form-control form-control-lg wryter-box-textarea"
+              class="form-control form-control-lg wryter-box-textarea lead"
               rows="10"
               placeholder="There's nothing worse than a blank page ..."
               v-model='wryterText'
@@ -124,7 +62,6 @@ export default {
           return;
         }
         this.timerProgress = (msRemaining / inputTimeInMilliseconds) * 100;
-        console.log(this.timerProgress);
         this.convertMillisecondsToTime(msRemaining);
       }, 1000);
       // set interval for every second
@@ -173,8 +110,18 @@ export default {
       }
     }
 
+    .progress {
+      display: none;
+    }
+
     .wryter-box-textarea {
       padding: 30px;
+      border: none;
+      border-radius: 0;
+
+      &:focus {
+        background: #FFF;
+      }
     }
   }
 </style>

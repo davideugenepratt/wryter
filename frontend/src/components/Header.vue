@@ -1,15 +1,41 @@
 <template>
-  <header>
-    <div class="navbar navbar-dark bg-dark box-shadow">
-      <div class="container d-flex justify-content-between">
-        <a href="/" class="navbar-brand d-flex align-items-center">
-          <strong>Wryter</strong>
+  <div class="navbar navbar-default default" role="navigation">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <a href ="/" @click="home">
+          Wryter
         </a>
-        <a v-if="loggedIn" href="#" @click="logout" class="login-text text-white">Logout</a>
-        <a v-else href="/login" class="login-text text-white">Login</a>
+      </div>
+      <div class="nav-bars-wrapper">
+        <div class="nav-bars-inner">
+          <div class="nav-bars" data-toggle="collapse" data-target=".navbar-collapse">
+            <span></span>
+          </div>
+        </div>
       </div>
     </div>
-  </header>
+    <div class="nav-wrapper">
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li v-if="loggedIn" class="dropdown">
+            <a href
+              class="dropdown-toggle welcome-link"
+              data-toggle="dropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Welcome <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href @click="logout" class="login-text">Logout</a></li>
+            </ul>
+          </li>
+          <li v-else><a href="/login" @click="login">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -30,8 +56,23 @@ export default {
   methods: {
     logout(e) {
       e.preventDefault();
-      this.$store.dispatch('logout');
+      this.$store.dispatch('/logout');
+    },
+    login(e) {
+      e.preventDefault();
+      this.$router.push('/login');
+    },
+    home(e) {
+      e.preventDefault();
+      this.$router.push('/');
     },
   },
 };
 </script>
+
+<style lang="scss">
+  .navbar-brand a {
+    color: #FFF;
+    font-weight: bold;
+  }
+</style>
