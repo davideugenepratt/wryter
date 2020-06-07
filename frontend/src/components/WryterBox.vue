@@ -21,7 +21,15 @@
             />
           </div>
           <div class="form-group">
-            <button class="btn btn-secondary">Save Wryting</button>
+            <button v-if="loggedIn" class="btn btn-secondary">Save Wryting</button>
+            <a
+              href="#"
+              v-else
+              class="btn btn-secondary"
+              @click="authModal"
+            >
+              Login or Register to Save
+            </a>
           </div>
         </form>
       </div>
@@ -87,6 +95,11 @@ export default {
     },
     formatNumberforTimeCode(number) {
       return number > 9 ? `${number}` : `0${number}`;
+    },
+    authModal(e) {
+      e.preventDefault();
+      const { $ } = window;
+      $('#authModal').modal('show');
     },
   },
 };

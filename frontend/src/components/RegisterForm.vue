@@ -40,9 +40,6 @@
         <div class="form-group">
           <button class="btn btn-lg btn-primary btn-block mt-3" id="submitButton">Submit</button>
         </div>
-        <div class="form-group">
-          <a href="/login" class="btn btn-lg btn-light btn-block mt-3" id="cancelButton">Cancel</a>
-        </div>
       </form>
     </div>
   </div>
