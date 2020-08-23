@@ -8,6 +8,7 @@
 
     <a class="image-credit"
       target="_blank"
+      v-bind:href="imageCredit.url"
     >
       <svg
         class="bi bi-image-fill"
