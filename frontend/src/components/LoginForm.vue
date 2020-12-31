@@ -34,9 +34,6 @@
         <div class="form-group">
           <button class="btn btn-lg btn-primary btn-block mt-3" id="loginButton">Login</button>
         </div>
-        <div class="form-group" id="registerButton">
-          <a href="/register" class="btn btn-lg btn-secondary btn-block mt-3">Register</a>
-        </div>
       </form>
     </div>
   </div>
@@ -60,8 +57,7 @@ export default {
     handleSubmit(e) {
       const self = this;
       e.preventDefault();
-      authController.login(this.username, this.password).then((response) => {
-        localStorage['wryter/token'] = response.data.token;
+      authController.login(this.username, this.password).then(() => {
         self.$store.dispatch('login');
         self.$router.push('/');
       }, () => {
@@ -72,11 +68,11 @@ export default {
 };
 </script>
 
-<style >
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-}
+<style lang="scss" >
+  .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+  }
 </style>

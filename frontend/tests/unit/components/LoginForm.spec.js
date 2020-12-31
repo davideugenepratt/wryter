@@ -9,27 +9,6 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('LoginForm.vue', () => {
-  const localStorageMock = () => {
-    const storage = {};
-    return {
-      setItem(key, value) {
-        storage[key] = value || '';
-      },
-      getItem(key) {
-        return key in storage ? storage[key] : null;
-      },
-      removeItem(key) {
-        delete storage[key];
-      },
-      getLength() {
-        return Object.keys(storage).length;
-      },
-      key(i) {
-        const keys = Object.keys(storage);
-        return keys[i] || null;
-      },
-    };
-  };
 
   const $router = {
     push: () => {},
@@ -37,7 +16,6 @@ describe('LoginForm.vue', () => {
 
   beforeEach(() => {
     moxios.install();
-    global.localStorage = localStorageMock();
   });
 
   afterEach(() => {

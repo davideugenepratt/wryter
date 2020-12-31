@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var writingController = require('../app/Writings/writingsController')
+var writingController = require('./writingController')
 
-router.post('/create', writingController.createWriting);
+router.post('/', writingController.createWriting);
 router.get('/', writingController.getAllWritings);
+router.get('/user/:id', writingController.getAllWritingsForUser);
 router.get('/:id', writingController.getWriting);
 router.put('/:id', writingController.editWriting);
 router.delete('/:id', writingController.deleteWriting)
