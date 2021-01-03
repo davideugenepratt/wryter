@@ -14,14 +14,6 @@
             </textarea>
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control input-lg lead wryter-box-title"
-              placeholder="Now just add a title ..."
-              v-model='wryterTitle'
-            />
-          </div>
-          <div class="form-group">
             <button v-if="loggedIn" class="btn btn-secondary">Save Wryting</button>
             <a
               href="#"
@@ -67,12 +59,16 @@ export default {
   },
   methods: {
     handleSubmit(e) {
+      const self = this;
       e.preventDefault();
+
       writingController.saveWriting(
         this.wryterText,
         this.wryterTitle,
         this.$store.state.unsplashResponse,
-      );
+      ).then(() => {
+        self.$router.push('/dashboard');
+      });
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);

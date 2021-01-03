@@ -43,7 +43,6 @@
                 <a href="index2.html"><span class="over"></span>
                   <div class="text-overlay caption">
                     <div class="info">
-                      <h2 class="post-title">{{ writing.title }}</h2>
                       <div class="meta">
                         <span class="date">
                           {{ new Date(writing.created).toLocaleDateString() }}
