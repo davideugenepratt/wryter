@@ -56,10 +56,12 @@ export default {
   methods: {
     handleSubmit(e) {
       const self = this;
+      const { $ } = window;
       e.preventDefault();
       authController.login(this.username, this.password).then(() => {
         self.$store.dispatch('login');
         self.$router.push('/');
+        $('#authModal').modal('hide');
       }, () => {
         this.responseError = true;
       });

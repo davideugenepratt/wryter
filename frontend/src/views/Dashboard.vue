@@ -39,16 +39,21 @@
       <div class="portfolio-grid">
           <ul class="isotope items" style="position: relative; height: 953.5px;">
             <li class="item" v-for="writing in writings" :key="writing.title">
-              <figure class="overlay"> <a href="index2.html"><span class="over"></span>
-              <div class="text-overlay caption">
-                <div class="info">
-                  <h2 class="post-title">{{ writing.title }}</h2>
-                  <div class="meta">
-                    <span class="date">{{ new Date(writing.created).toLocaleDateString() }}</span>
+              <figure class="overlay">
+                <a href="index2.html"><span class="over"></span>
+                  <div class="text-overlay caption">
+                    <div class="info">
+                      <h2 class="post-title">{{ writing.title }}</h2>
+                      <div class="meta">
+                        <span class="date">
+                          {{ new Date(writing.created).toLocaleDateString() }}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <img v-bind:src="writing.unsplashResponse.urls.small" alt=""> </a> </figure>
+                  <img v-bind:src="writing.unsplashResponse.urls.small" alt="">
+                </a>
+              </figure>
             </li>
           </ul>
       </div>
@@ -86,6 +91,10 @@ export default {
 
 #dashboard-container .page-title {
   margin-bottom: 50px;
+}
+
+.portfolio-grid {
+  margin-bottom: 80px;
 }
 
 </style>

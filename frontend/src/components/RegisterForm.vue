@@ -78,8 +78,11 @@ export default {
       if (this.errors.length) {
         return;
       }
-      // post data
-      authController.register(this.username, this.password);
+      const { $ } = window;
+
+      authController.register(this.username, this.password).then(() => {
+        $('#authModal').modal('hide');
+      });
     },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
