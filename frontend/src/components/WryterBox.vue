@@ -9,6 +9,7 @@
               rows="10"
               placeholder="There's nothing worse than a blank page ..."
               v-model='wryterText'
+              v-on:input='updateTextAreaHeight'
               >
             </textarea>
           </div>
@@ -61,7 +62,7 @@ export default {
   },
   watch: {
     wryterText(val) {
-      this.wordCount = val === '' ? 0 : val.match(/\w+/g).length;
+      this.wordCount = (!/\S/.test(val) || val === '0') ? 0 : val.match(/\w+/g).length;
     },
   },
   methods: {
@@ -101,6 +102,12 @@ export default {
       const { $ } = window;
       $('#authModal').modal('show');
     },
+    updateTextAreaHeight(event) {
+      const el = event.currentTarget;
+      el.style.height = 'inherit';
+      el.style.height = `${el.scrollHeight}px`;
+    },
+
   },
 };
 </script>

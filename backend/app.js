@@ -73,6 +73,7 @@ var staticMiddleware = express.static(path.join(__dirname, '../frontend/dist'));
 
 app.use(staticMiddleware);
 app.use(history());
+app.use('/api/writings', writingsRouter)
 app.use('/api/unsplash', unsplashRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/writing', writingRouter);
