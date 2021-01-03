@@ -23,6 +23,12 @@ export default {
     };
   },
   mounted() {
+    // TODO add ui to the image that suggests that it's clickable to toggle full screen
+    // and add close button to page when clicked
+    $('.unsplash-image-container').on('click', () => {
+      $('.wryter-box').toggleClass('hidden');
+      $('.unsplash-image-container').toggleClass('full-screen');
+    });
     $(window).on('scroll resize', () => {
       const value = $(window).scrollTop();
       $('.wryter-box').css('margin-top', `${Math.floor((value * -0.5) - 100)}px`);
@@ -39,8 +45,28 @@ export default {
   #home-container {
     background: #1e1e1e;
   }
-
-  .wryter-box{
-    position: relative;
+  .unsplash-image-container.full-screen{
+  transform: scale(1.2);
+  position: relative;
+  transition: all .5s;
+    :hover{
+      cursor: zoom-out;
+    }
+}
+.unsplash-image-container{
+  position: relative;
+  transition: all .5s;
+  :hover{
+    cursor: zoom-in;
   }
+}
+  .wryter-box {
+  position: relative;
+  transition: scale, opacity .5s;
+  opacity: 1
+}
+.wryter-box.hidden{
+  transition: scale, opacity .5s;
+  opacity: 0;
+}
 </style>

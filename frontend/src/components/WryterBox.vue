@@ -2,15 +2,17 @@
   <div class="wryter-box container">
     <div class="row">
       <div class="col-12">
-        <form>
+        <form @submit="handleSubmit">
           <div class="form-group">
             <textarea
               class="form-control form-control-lg wryter-box-textarea lead"
               rows="10"
               placeholder="There's nothing worse than a blank page ..."
               v-model='wryterText'
+              v-on:input='updateTextAreaHeight'
               >
             </textarea>
+            <button class="btn btn-secondary">Save Wryting</button>
           </div>
         </form>
       </div>
@@ -19,6 +21,8 @@
 </template>
 
 <script>
+import * as writingController from '../controllers/writingController';
+
 export default {
   data() {
     return {
@@ -34,10 +38,15 @@ export default {
   },
   watch: {
     wryterText(val) {
-      this.wordCount = val === '' ? 0 : val.match(/\w+/g).length;
+      this.wordCount = (!/\S/.test(val) || val === '0') ? 0 : val.match(/\w+/g).length;
     },
   },
   methods: {
+    handleSubmit(e) {
+      e.preventDefault();
+      console.log(this.wryterText);
+      writingController.saveWriting(this.wryterText);
+    },
     timer(minutes) {
       clearInterval(this.countdownInterval);
       const inputTimeInMilliseconds = minutes * 60000;
@@ -65,6 +74,12 @@ export default {
     formatNumberforTimeCode(number) {
       return number > 9 ? `${number}` : `0${number}`;
     },
+    updateTextAreaHeight(event) {
+      const el = event.currentTarget;
+      el.style.height = 'inherit';
+      el.style.height = `${el.scrollHeight}px`;
+    },
+
   },
 };
 </script>
