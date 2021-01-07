@@ -28,10 +28,11 @@
               Welcome <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+              <li><a href @click="dashboard" class="login-text">Dashboard</a></li>
               <li><a href @click="logout" class="login-text">Logout</a></li>
             </ul>
           </li>
-          <li v-else><a href="/login" @click="login">Login</a></li>
+          <li v-else><a href="/login" @click="authModal">Login</a></li>
         </ul>
       </div>
     </div>
@@ -39,17 +40,10 @@
 </template>
 
 <script>
-const authController = require('../controllers/authController');
-
 export default {
   name: 'Header',
   computed: {
     loggedIn() {
-      if (authController.checkToken()) {
-        this.$store.dispatch('login');
-      } else {
-        this.$store.dispatch('logout');
-      }
       return this.$store.state.loggedIn;
     },
   },
@@ -58,13 +52,18 @@ export default {
       e.preventDefault();
       this.$store.dispatch('logout');
     },
-    login(e) {
+    authModal(e) {
       e.preventDefault();
-      this.$router.push('login');
+      const { $ } = window;
+      $('#authModal').modal('show');
     },
     home(e) {
       e.preventDefault();
       this.$router.push('/');
+    },
+    dashboard(e) {
+      e.preventDefault();
+      this.$router.push('/dashboard');
     },
   },
 };

@@ -12,7 +12,17 @@
               v-on:input='updateTextAreaHeight'
               >
             </textarea>
-            <button class="btn btn-secondary">Save Wryting</button>
+          </div>
+          <div class="form-group">
+            <button v-if="loggedIn" class="btn btn-secondary">Save Wryting</button>
+            <a
+              href="#"
+              v-else
+              class="btn btn-secondary"
+              @click="authModal"
+            >
+              Login or Register to Save
+            </a>
           </div>
         </form>
       </div>
@@ -24,9 +34,15 @@
 import * as writingController from '../controllers/writingController';
 
 export default {
+  computed: {
+    loggedIn() {
+      return this.$store.state.loggedIn;
+    },
+  },
   data() {
     return {
       wryterText: '',
+      wryterTitle: '',
       wordCount: 0,
       wordGoal: 250,
       minutesRemaining: this.formatNumberforTimeCode(0),
@@ -43,17 +59,21 @@ export default {
   },
   methods: {
     handleSubmit(e) {
+      const self = this;
       e.preventDefault();
-      console.log(this.wryterText);
-      writingController.saveWriting(this.wryterText);
+
+      writingController.saveWriting(
+        this.wryterText,
+        this.wryterTitle,
+        this.$store.state.unsplashResponse,
+      ).then(() => {
+        self.$router.push('/dashboard');
+      });
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);
       const inputTimeInMilliseconds = minutes * 60000;
       this.convertMillisecondsToTime(inputTimeInMilliseconds);
-      //  get time now();
-      /*  scrolling/ tabbing away in some browsers
-        stops intervals so we are basing it on Unix time difference */
       const currentTime = Date.now();
       const endOfCountdownTime = currentTime + inputTimeInMilliseconds;
       this.countdownInterval = setInterval(() => {
@@ -65,7 +85,6 @@ export default {
         this.timerProgress = (msRemaining / inputTimeInMilliseconds) * 100;
         this.convertMillisecondsToTime(msRemaining);
       }, 1000);
-      // set interval for every second
     },
     convertMillisecondsToTime(ms) {
       this.minutesRemaining = this.formatNumberforTimeCode(Math.floor(ms / 60000));
@@ -73,6 +92,11 @@ export default {
     },
     formatNumberforTimeCode(number) {
       return number > 9 ? `${number}` : `0${number}`;
+    },
+    authModal(e) {
+      e.preventDefault();
+      const { $ } = window;
+      $('#authModal').modal('show');
     },
     updateTextAreaHeight(event) {
       const el = event.currentTarget;
@@ -129,6 +153,12 @@ export default {
       &:focus {
         background: #FFF;
       }
+    }
+
+    .wryter-box-title {
+      background: #FFF;
+      font-size: 28px;
+      height: 65px;
     }
   }
 </style>
