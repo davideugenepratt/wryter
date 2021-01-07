@@ -8,19 +8,14 @@
               class="form-control form-control-lg wryter-box-textarea lead"
               rows="10"
               placeholder="There's nothing worse than a blank page ..."
-              v-model='wryterText'
-              v-on:input='updateTextAreaHeight'
-              >
+              v-model="wryterText"
+              v-on:input="updateTextAreaHeight"
+            >
             </textarea>
           </div>
           <div class="form-group">
             <button v-if="loggedIn" class="btn btn-secondary">Save Wryting</button>
-            <a
-              href="#"
-              v-else
-              class="btn btn-secondary"
-              @click="authModal"
-            >
+            <a href="#" v-else class="btn btn-secondary" @click="authModal">
               Login or Register to Save
             </a>
           </div>
@@ -54,21 +49,22 @@ export default {
   },
   watch: {
     wryterText(val) {
-      this.wordCount = (!/\S/.test(val) || val === '0') ? 0 : val.match(/\w+/g).length;
+      this.wordCount = !/\S/.test(val) || val === '0' ? 0 : val.match(/\w+/g).length;
     },
   },
   methods: {
-    handleSubmit(e) {
+    async handleSubmit(e) {
       const self = this;
       e.preventDefault();
-
-      writingController.saveWriting(
+      // TODO error handling for empty values.
+      // Must have at least a title or text and it must have an image attatched
+      await writingController.saveWriting(
         this.wryterText,
         this.wryterTitle,
         this.$store.state.unsplashResponse,
-      ).then(() => {
-        self.$router.push('/dashboard');
-      });
+      );
+
+      self.$router.push('/dashboard');
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);
@@ -103,62 +99,60 @@ export default {
       el.style.height = 'inherit';
       el.style.height = `${el.scrollHeight}px`;
     },
-
   },
 };
 </script>
 
 <style scoped lang="scss">
-  .wryter-box.container {
+.wryter-box.container {
+  .word-count-goal {
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
 
-    .word-count-goal {
-      background: #FFF;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      padding: 10px;
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
+    .dropdown {
+      width: 50%;
 
-      .dropdown {
-        width: 50%;
-
-        .btn {
-          font-weight: bold;
-        }
-      }
-
-      .separator {
-        margin: 0 10px;
-        font-size: 30px;
-        font-weight: bold;
-      }
-
-      .word-count {
-        width: 50%;
-        cursor: normal;
+      .btn {
         font-weight: bold;
       }
     }
 
-    .progress {
-      display: none;
+    .separator {
+      margin: 0 10px;
+      font-size: 30px;
+      font-weight: bold;
     }
 
-    .wryter-box-textarea {
-      padding: 30px;
-      border: none;
-      border-radius: 0;
-
-      &:focus {
-        background: #FFF;
-      }
-    }
-
-    .wryter-box-title {
-      background: #FFF;
-      font-size: 28px;
-      height: 65px;
+    .word-count {
+      width: 50%;
+      cursor: normal;
+      font-weight: bold;
     }
   }
+
+  .progress {
+    display: none;
+  }
+
+  .wryter-box-textarea {
+    padding: 30px;
+    border: none;
+    border-radius: 0;
+
+    &:focus {
+      background: #fff;
+    }
+  }
+
+  .wryter-box-title {
+    background: #fff;
+    font-size: 28px;
+    height: 65px;
+  }
+}
 </style>
