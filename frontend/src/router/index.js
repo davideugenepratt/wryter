@@ -4,6 +4,7 @@ import store from '../store';
 import AuthHelper from '../helpers/authHelper';
 import Home from '../views/Home.vue';
 import Dashboard from '../views/Dashboard.vue';
+import SingleWriting from '../views/SingleWriting.vue';
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,14 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/writing',
+    name: 'SingleWriting',
+    component: SingleWriting,
     meta: {
       requiresAuth: true,
     },
