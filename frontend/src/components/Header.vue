@@ -32,7 +32,7 @@
               <li><a href @click="logout" class="login-text">Logout</a></li>
             </ul>
           </li>
-          <li v-else><a href="/login" @click="authModal">Login</a></li>
+          <li v-else><a href="/login" @click="login">Login</a></li>
         </ul>
       </div>
     </div>
@@ -52,10 +52,9 @@ export default {
       e.preventDefault();
       this.$store.dispatch('logout');
     },
-    authModal(e) {
+    login(e) {
       e.preventDefault();
-      const { $ } = window;
-      $('#authModal').modal('show');
+      this.$router.push('login');
     },
     home(e) {
       e.preventDefault();
