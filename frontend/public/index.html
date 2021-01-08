@@ -6,12 +6,37 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/plugins.css" rel="stylesheet">
+    <link href="revolution/css/settings.css" rel="stylesheet">
+    <link href="revolution/css/layers.css" rel="stylesheet">
+    <link href="revolution/css/navigation.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/color/aqua.css" rel="stylesheet">
+    <link href="type/icons.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,900italic,900,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Vidaloka' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div class="full-box">
+      <main>
+        <div id="app"></div>
+      </main>
+    </div>
     <!-- built files will be auto injected -->
+    <script src="js/jquery.min.js"></script> 
+    <script src="js/bootstrap.min.js"></script> 
+    <script src="revolution/js/jquery.themepunch.tools.min.js?rev=5.0"></script> 
+    <script src="revolution/js/jquery.themepunch.revolution.min.js?rev=5.0"></script> 
+    <script src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="js/plugins.js"></script> 
+    <script src="js/scripts.js"></script>
   </body>
 </html>

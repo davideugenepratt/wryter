@@ -12,3 +12,14 @@ export default {
   components: { RegisterForm },
 };
 </script>
+
+<style lang="scss">
+  #register-container {
+    padding-top: 75px;
+  }
+
+  .form-signin {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+</style>

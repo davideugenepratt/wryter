@@ -25,32 +25,50 @@ export default {
     };
   },
   mounted() {
-    // need to set initial height of writer box before it loads
-    //
+    // TODO add ui to the image that suggests that it's clickable to toggle full screen
+    // and add close button to page when clicked
+    $('.unsplash-image-container').on('click', () => {
+      $('.wryter-box').toggleClass('hidden');
+      $('.unsplash-image-container').toggleClass('full-screen');
+    });
     $(window).on('scroll resize', () => {
       const value = $(window).scrollTop();
-      const windowHeight = $(window).height();
-      $('.wryter-box').css('top', `${(windowHeight - 250) - value * 0.5}px`);
-      console.log(`${value}px from top`);
-      // $('.wryter-box').css();
-      //  todo base 500 value on window height and adjust accordingly to that
-      //  might have to recalculate with change in window size
+      $('.wryter-box').css('margin-top', `${Math.floor((value * -0.5) - 100)}px`);
     });
     $(window).trigger('scroll');
   },
 };
 </script>
-<style>
-body{
-  height: 1000px;
-  transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+<style scoped lang="scss">
+  body {
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  #home-container {
+    background: #1e1e1e;
+  }
+  .unsplash-image-container.full-screen{
+  transform: scale(1.2);
+  position: relative;
+  transition: all .5s;
+    :hover{
+      cursor: zoom-out;
+    }
 }
 .unsplash-image-container{
   position: relative;
+  transition: all .5s;
+  :hover{
+    cursor: zoom-in;
+  }
 }
-.wryter-box{
-  position: absolute;
-  left:50%;
-  transform: translateX(-50%)
+  .wryter-box {
+  position: relative;
+  transition: scale, opacity .5s;
+  opacity: 1
+}
+.wryter-box.hidden{
+  transition: scale, opacity .5s;
+  opacity: 0;
 }
 </style>

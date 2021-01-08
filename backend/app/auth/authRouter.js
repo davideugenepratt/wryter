@@ -5,6 +5,8 @@ var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
 let register = function(req, res, next) {
+  res.json({success: true});
+  console.log(req.body)
   if (!validatePassword(req.body.password)){
     console.error('invalid password');
     return;
@@ -16,7 +18,6 @@ let register = function(req, res, next) {
   });
   
   var result = User.createUser(user).then(function(response){
-    console.log(response);
     res.json(response);
   }).catch(function(error){
     res.status(error.code).json(error);
@@ -32,6 +33,7 @@ let login = function(req, res, next) {
   }).catch(function(error) {
     res.status(error.code).json(error);
   });
+  
 };
 //password validation function. Maybe place in a helper function eventually
 const validatePassword = (password) => {
