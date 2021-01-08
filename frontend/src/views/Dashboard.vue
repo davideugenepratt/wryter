@@ -42,7 +42,7 @@
         <ul class="isotope items" style="position: relative; height: 953.5px;">
           <li class="item" v-for="writing in writings" :key="writing._id">
             <figure class="overlay">
-              <a href="index2.html"
+              <a :href="/writing/ + writing.slug"
                 ><span class="over"></span>
                 <div class="text-overlay caption">
                   <div class="info">

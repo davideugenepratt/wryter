@@ -4,7 +4,7 @@ import store from '../store';
 import AuthHelper from '../helpers/authHelper';
 import Home from '../views/Home.vue';
 import Dashboard from '../views/Dashboard.vue';
-import SingleWriting from '../views/SingleWriting.vue';
+import Writing from '../views/Writing.vue';
 
 Vue.use(VueRouter);
 
@@ -23,18 +23,15 @@ const routes = [
     },
   },
   {
-    path: '/writing',
-    name: 'SingleWriting',
-    component: SingleWriting,
-    meta: {
-      requiresAuth: true,
-    },
+    name: 'writing',
+    path: '/writing/:id',
+    component: Writing,
   },
 ];
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: '/',
   routes,
 });
 
@@ -46,7 +43,7 @@ router.beforeEach((to, from, next) => {
     } else {
       store.dispatch('logout');
       next({
-        path: '/login',
+        path: '/',
         params: { nextUrl: to.fullPath },
       });
     }
