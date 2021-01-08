@@ -2,7 +2,7 @@
   <div class="wryter-box container">
     <div class="row">
       <div class="col-12">
-        <form @submit="handleSubmit">
+        <form @submit="openTitleModal">
           <div class="form-group">
             <textarea
               class="form-control form-control-lg wryter-box-textarea lead"
@@ -22,13 +22,19 @@
         </form>
       </div>
     </div>
+    <TitleModal :wryterTitle="wryterTitle" @updateTitle="updateTitle($event)" />
   </div>
 </template>
 
 <script>
 import * as writingController from '../controllers/writingController';
+import TitleModal from './TitleModal.vue';
 
 export default {
+  name: 'WryterBox',
+  components: {
+    TitleModal,
+  },
   computed: {
     loggedIn() {
       return this.$store.state.loggedIn;
@@ -53,9 +59,9 @@ export default {
     },
   },
   methods: {
-    async handleSubmit(e) {
+    async handleSubmit() {
       const self = this;
-      e.preventDefault();
+      // e.preventDefault();
       // TODO error handling for empty values.
       // Must have at least a title or text and it must have an image attatched
       await writingController.saveWriting(
@@ -93,6 +99,17 @@ export default {
       e.preventDefault();
       const { $ } = window;
       $('#authModal').modal('show');
+    },
+    openTitleModal(e) {
+      e.preventDefault();
+      const { $ } = window;
+      $('#titleModal').modal('show');
+    },
+    updateTitle(inputTitle) {
+      this.wryterTitle = inputTitle;
+      const { $ } = window;
+      $('#titleModal').modal('hide');
+      this.handleSubmit();
     },
     updateTextAreaHeight(event) {
       const el = event.currentTarget;
