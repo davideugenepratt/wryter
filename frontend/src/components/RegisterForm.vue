@@ -40,9 +40,6 @@
         <div class="form-group">
           <button class="btn btn-lg btn-primary btn-block mt-3" id="submitButton">Submit</button>
         </div>
-        <div class="form-group">
-          <a href="/login" class="btn btn-lg btn-light btn-block mt-3" id="cancelButton">Cancel</a>
-        </div>
       </form>
     </div>
   </div>
@@ -81,8 +78,11 @@ export default {
       if (this.errors.length) {
         return;
       }
-      // post data
-      authController.register(this.username, this.password);
+      const { $ } = window;
+
+      authController.register(this.username, this.password).then(() => {
+        $('#authModal').modal('hide');
+      });
     },
     validateEmail() {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

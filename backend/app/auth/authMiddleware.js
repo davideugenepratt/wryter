@@ -17,6 +17,6 @@ const middleware = function (req, res, next) {
 };
 
 // Add protected routes here:
-// router.all('/user/stories/*', middleware );
+router.all('/api/writing/*', middleware );
 
 module.exports = router;
