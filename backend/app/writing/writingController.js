@@ -50,6 +50,7 @@ let getAllWritingsForUser = function (req, res) {
 
 let getWriting = function (req, res) {
   const id = req.params.id;
+  console.log(`***node searching for writing***** id: ${req.params.id}`);
   Writing.findById(id)
     .then((items) => {
       res.json(items);

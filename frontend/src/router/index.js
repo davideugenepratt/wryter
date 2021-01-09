@@ -24,8 +24,11 @@ const routes = [
   },
   {
     name: 'writing',
-    path: '/writing/:id',
+    path: '/writing/:slug/:id',
     component: Writing,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
@@ -36,11 +39,24 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log('checking token');
+  if (AuthHelper.checkToken()) {
+    console.log('dispatching login');
+
+    store.dispatch('login');
+    next();
+  } else {
+    next();
+  }
+});
+router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (AuthHelper.checkToken()) {
       store.dispatch('login');
       next();
     } else {
+      const { $ } = window;
+      $('#authModal').modal('show');
       store.dispatch('logout');
       next({
         path: '/',

@@ -1,70 +1,105 @@
 <template>
-  <div id="home-container">
-    <UnsplashImage />
-    <WryterBox />
+  <div id="writing container " class="writing container">
+    <div class="writing__content">
+      <div class="writing__image">
+        <picture>
+          <source media="(max-width: 400px)" v-bind:srcset="this.unsplashData.urls.small" />
+          <source media="(max-width: 1080px)" v-bind:srcset="this.unsplashData.urls.full" />
+          <img v-bind:src="this.unsplashData.urls.regular" />
+        </picture>
+      </div>
+      <div class="writing__text-content">
+        <div class="writing__title">
+          <h1>{{ this.writingTitle }}</h1>
+        </div>
+        <div class="writing__main">
+          <p>
+            {{ this.writingText }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import $ from 'jquery';
-import UnsplashImage from '../components/UnsplashImage.vue';
-import WryterBox from '../components/WryterBox.vue';
+const axios = require('axios').default;
 
 export default {
   name: 'writing',
-  components: {
-    UnsplashImage,
-    WryterBox,
-  },
+  components: {},
   data() {
-    return {};
+    return {
+      writingText: String,
+      writingTitle: String,
+      writingDate: Number,
+      unsplashData: Object,
+    };
   },
   mounted() {
-    // TODO add ui to the image that suggests that it's clickable to toggle full screen
-    // and add close button to page when clicked
-    $('.unsplash-image-container').on('click', () => {
-      $('.wryter-box').toggleClass('hidden');
-      $('.unsplash-image-container').toggleClass('full-screen');
-    });
-    $(window).on('scroll resize', () => {
-      const value = $(window).scrollTop();
-      $('.wryter-box').css('margin-top', `${Math.floor(value * -0.5 - 100)}px`);
-    });
-    $(window).trigger('scroll');
+    console.log(this.$route.params.id);
+  },
+  created() {
+    this.fetchWriting();
+  },
+
+  methods: {
+    fetchWriting() {
+      console.log('fetching data');
+
+      // TODO set loading state logic in store
+      // Make API request
+      axios
+        .get(`${process.env.VUE_APP_API_ROOT}/writing/${this.$route.params.id}`)
+        .then((response) => {
+          console.log(response);
+          const { data } = response;
+          this.writingText = data.text;
+          this.writingTitle = data.title;
+          this.unsplashData = data.unsplashResponse;
+        });
+
+      // get response back
+      // set writing object to it's values in props
+    },
   },
 };
 </script>
 <style scoped lang="scss">
 body {
   transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
-}
+  .writing {
+    position: relative;
+    padding: 0;
 
-#home-container {
-  background: #1e1e1e;
-}
-.unsplash-image-container.full-screen {
-  transform: scale(1.2);
-  position: relative;
-  transition: all 0.5s;
-  :hover {
-    cursor: zoom-out;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+    img {
+      width: 100%;
+      object-fit: cover;
+      margin: 0 auto;
+    }
+
+    &__content {
+      width: 100%;
+      height: 100%;
+      background: lightgray;
+      display: inline-block;
+      position: relative;
+    }
+    &__text-content {
+      padding: 50px;
+      width: 50%;
+      background: white;
+      border-radius: 5px;
+      z-index: 10;
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
   }
-}
-.unsplash-image-container {
-  position: relative;
-  transition: all 0.5s;
-  :hover {
-    cursor: zoom-in;
-  }
-}
-.wryter-box {
-  position: relative;
-  transition: scale, opacity 0.5s;
-  opacity: 1;
-}
-.wryter-box.hidden {
-  transition: scale, opacity 0.5s;
-  opacity: 0;
 }
 </style>

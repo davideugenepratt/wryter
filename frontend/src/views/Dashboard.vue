@@ -40,9 +40,9 @@
       </div>
       <div class="portfolio-grid">
         <ul class="isotope items" style="position: relative; height: 953.5px;">
-          <li class="item" v-for="writing in writings" :key="writing._id">
+          <li class="item" v-for="writing in writings" :key="writing._id" :id="writing._id">
             <figure class="overlay">
-              <a :href="/writing/ + writing.slug"
+              <a :href="/writing/ + writing.slug + '/' + writing._id"
                 ><span class="over"></span>
                 <div class="text-overlay caption">
                   <div class="info">
