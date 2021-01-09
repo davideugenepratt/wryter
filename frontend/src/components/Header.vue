@@ -2,7 +2,7 @@
   <div class="navbar navbar-default default" role="navigation">
     <div class="navbar-header">
       <div class="navbar-brand">
-        <a href ="/" @click="home">
+        <a href="/" @click="home">
           Wryter
         </a>
       </div>
@@ -18,7 +18,8 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li v-if="loggedIn" class="dropdown">
-            <a href
+            <a
+              href
               class="dropdown-toggle welcome-link"
               data-toggle="dropdown"
               role="button"
@@ -32,7 +33,11 @@
               <li><a href @click="logout" class="login-text">Logout</a></li>
             </ul>
           </li>
-          <li v-else><a href="/login" @click="login">Login</a></li>
+          <li v-else>
+            <a href="#" class="btn btn-secondary" @click="authModal">
+              Login or Register
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -48,6 +53,11 @@ export default {
     },
   },
   methods: {
+    authModal(e) {
+      e.preventDefault();
+      const { $ } = window;
+      $('#authModal').modal('show');
+    },
     logout(e) {
       e.preventDefault();
       this.$store.dispatch('logout');
@@ -69,8 +79,8 @@ export default {
 </script>
 
 <style lang="scss">
-  .navbar-brand a {
-    color: #FFF;
-    font-weight: bold;
-  }
+.navbar-brand a {
+  color: #fff;
+  font-weight: bold;
+}
 </style>
