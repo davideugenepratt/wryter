@@ -28,7 +28,7 @@
 
           <div class="form-group form-signin" id="Save Button">
             <a href class="btn btn-lg btn-light btn-block mt-3" @click="handleInput">
-              Save
+              Submit
             </a>
           </div>
         </div>

@@ -1,39 +1,39 @@
 <template>
-  <div id="writing container " class="writing container">
+  <div id="writing  " class="writing container">
     <div class="writing__content">
+      <wryterBoxEditable
+        class="writing__text-content"
+        :editable="true"
+        :id="this.$route.params.id || null"
+        :text="this.writingText"
+        :title="this.writingTitle"
+        :date="this.writingDate"
+      />
       <div class="writing__image">
         <picture>
-          <source media="(max-width: 400px)" v-bind:srcset="this.unsplashData.urls.small" />
-          <source media="(max-width: 1080px)" v-bind:srcset="this.unsplashData.urls.full" />
-          <img v-bind:src="this.unsplashData.urls.regular" />
+          <source media="(max-width: 400px)" v-bind:srcset="this.unsplashData.small" />
+          <source media="(max-width: 1080px)" v-bind:srcset="this.unsplashData.full" />
+          <img v-bind:src="this.unsplashData.regular" />
         </picture>
-      </div>
-      <div class="writing__text-content">
-        <div class="writing__title">
-          <h1>{{ this.writingTitle }}</h1>
-        </div>
-        <div class="writing__main">
-          <p>
-            {{ this.writingText }}
-          </p>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import WryterBoxEditable from '../components/WryterBoxEditable.vue';
+
 const axios = require('axios').default;
 
 export default {
   name: 'writing',
-  components: {},
+  components: { WryterBoxEditable },
   data() {
     return {
       writingText: String,
       writingTitle: String,
       writingDate: Number,
-      unsplashData: Object,
+      unsplashData: String,
     };
   },
   mounted() {
@@ -56,7 +56,12 @@ export default {
           const { data } = response;
           this.writingText = data.text;
           this.writingTitle = data.title;
-          this.unsplashData = data.unsplashResponse;
+          this.writingDate = data.created;
+          this.unsplashData = {
+            full: data.unsplashResponse.urls.full,
+            regular: data.unsplashResponse.urls.regular,
+            small: data.unsplashResponse.urls.small,
+          };
         });
 
       // get response back
@@ -70,34 +75,39 @@ body {
   transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
   .writing {
     position: relative;
-    padding: 0;
 
+    padding: 0;
     width: 100%;
     margin: 0 auto;
     min-height: 100vh;
-    img {
+    &__image {
       width: 100%;
+      min-height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    img {
+      height: 100vh;
+      min-width: 100%;
       object-fit: cover;
       margin: 0 auto;
     }
 
     &__content {
       width: 100%;
-      height: 100%;
       background: lightgray;
-      display: inline-block;
-      position: relative;
     }
     &__text-content {
+      margin-top: 10%;
+      margin-bottom: 25%;
       padding: 50px;
-      width: 50%;
+      width: 75%;
+      position: relative;
+      object-position: center;
       background: white;
       border-radius: 5px;
       z-index: 10;
-      position: absolute;
-      top: 25%;
-      left: 50%;
-      transform: translateX(-50%);
       text-align: center;
     }
   }
