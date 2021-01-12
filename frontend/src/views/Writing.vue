@@ -1,6 +1,9 @@
 <template>
   <div id="writing  " class="writing container">
-    <div class="writing__content">
+    <div v-if="loading" class="loading">
+      lading...
+    </div>
+    <div v-else class="writing__content">
       <wryterBoxEditable
         class="writing__text-content"
         :editable="true"
@@ -30,10 +33,11 @@ export default {
   components: { WryterBoxEditable },
   data() {
     return {
-      writingText: String,
-      writingTitle: String,
-      writingDate: Number,
-      unsplashData: String,
+      loading: true,
+      writingText: '',
+      writingTitle: '',
+      writingDate: '',
+      unsplashData: '',
     };
   },
   mounted() {
@@ -44,15 +48,12 @@ export default {
   },
 
   methods: {
-    fetchWriting() {
-      console.log('fetching data');
-
+    async fetchWriting() {
       // TODO set loading state logic in store
       // Make API request
-      axios
+      await axios
         .get(`${process.env.VUE_APP_API_ROOT}/writing/${this.$route.params.id}`)
         .then((response) => {
-          console.log(response);
           const { data } = response;
           this.writingText = data.text;
           this.writingTitle = data.title;
@@ -63,6 +64,7 @@ export default {
             small: data.unsplashResponse.urls.small,
           };
         });
+      this.loading = false;
 
       // get response back
       // set writing object to it's values in props

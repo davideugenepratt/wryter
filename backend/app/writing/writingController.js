@@ -21,12 +21,7 @@ let createWriting = function (req, res) {
 };
 
 let getAllWritings = function (req, res) {
-  console.log(req);
-
-  Writing.find(
-    { author: req.user.username },
-    '_id title slug unsplashResponse.urls created'
-  )
+  Writing.find({ author: req.user.username }, '_id title slug unsplashResponse.urls created')
     .then((writings) => {
       res.json({
         writings,
@@ -50,7 +45,6 @@ let getAllWritingsForUser = function (req, res) {
 
 let getWriting = function (req, res) {
   const id = req.params.id;
-  console.log(`***node searching for writing***** id: ${req.params.id}`);
   Writing.findById(id)
     .then((items) => {
       res.json(items);
@@ -60,11 +54,18 @@ let getWriting = function (req, res) {
     });
 };
 
-let editWriting = function (req, res) {
+let editWriting = async function (req, res) {
+  console.log('******in the edit writing controller method');
+  console.log(req.body);
+  console.log(req.params.id);
+
   const id = req.params.id;
-  Writing.findOneAndUpdate(id, req.body, { useFindAndModify: false })
-    .then((items) => {
-      res.json({});
+  await Writing.findOneAndUpdate({ _id: id }, req.body, {
+    useFindAndModify: false,
+    new: true,
+  })
+    .then((doc) => {
+      res.json({ success: true, message: 'writing updated.', doc });
     })
     .catch((err) => {
       res.status(err.code).json(err);

@@ -1,6 +1,10 @@
 <template>
   <div v-cloak class="wryter-box container">
-    <div v-if="!editingMode" class="writing__text-content card" style="width:100%;">
+    <div
+      v-if="this.editable && !editingMode"
+      class="writing__text-content card"
+      style="width:100%;"
+    >
       <div class="card__edit-button" target="_blank" href="#" v-on:click="toggleEditingMode">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,22 +29,21 @@
       </div>
 
       <div class="card-body">
-        <h5 class="card-title">{{ this.title }}</h5>
+        <h5 class="card-title">{{ wryterTitle }}</h5>
         <h6 class="card-subtitle card__date">{{ new Date(this.date).toLocaleDateString() }}</h6>
         <p class="card-text">
-          {{ this.text }}
+          {{ wryterText }}
         </p>
       </div>
     </div>
     <div class="card__textarea">
-      <form @submit="openTitleModal">
+      <form @submit="handleSubmit">
         <div class="form-group">
           <textarea
             autoFocus="autofocus"
             class="form-control form-control-lg wryter-box-textarea lead"
             rows="10"
-            :value="editable ? this.text : ''"
-            :v-model="editingMode ? this.text : this.wryterText"
+            v-model="wryterText"
             :placeholder="this.editable ? null : 'there\'s nothing worse than a blank page'"
             v-on:input="updateTextAreaHeight"
             style="resize: none;"
@@ -63,8 +66,6 @@
 import * as writingController from '../controllers/writingController';
 import TitleModal from './TitleModal.vue';
 
-const axios = require('axios').default;
-
 export default {
   name: 'WryterBoxEditable',
   props: ['title', 'text', 'date', 'id', 'editable'],
@@ -79,8 +80,8 @@ export default {
   data() {
     return {
       editingMode: false,
-      wryterText: '',
-      wryterTitle: '',
+      wryterText: this.text || '',
+      wryterTitle: this.title || '',
       wordCount: 0,
       wordGoal: 250,
       minutesRemaining: this.formatNumberforTimeCode(0),
@@ -96,39 +97,26 @@ export default {
     },
   },
   methods: {
-    fetchWriting() {
-      console.log('fetching data');
+    async handleSubmit(e) {
+      e.preventDefault();
 
-      // TODO set loading state logic in store
-      // Make API request
-      axios.get(`${process.env.VUE_APP_API_ROOT}/writing/${this.id}`).then((response) => {
-        console.log(response);
-        const { data } = response;
-        this.writingText = data.text;
-        this.writingTitle = data.title;
-        this.writingDate = data.created;
-        this.unsplashData = {
-          full: data.unsplashResponse.urls.full,
-          regular: data.unsplashResponse.urls.regular,
-          small: data.unsplashResponse.urls.small,
-        };
-      });
-
-      // get response back
-      // set writing object to it's values in props
-    },
-    async handleSubmit() {
       const self = this;
       // e.preventDefault();
       // TODO error handling for empty values.
       // Must have at least a title or text and it must have an image attatched
-      await writingController.saveWriting(
-        this.wryterText,
-        this.wryterTitle,
-        this.$store.state.unsplashResponse,
-      );
-
-      self.$router.push('/dashboard');
+      if (!this.editable) {
+        await writingController.saveWriting(
+          this.wryterText,
+          this.wryterTitle,
+          this.$store.state.unsplashResponse,
+        );
+        self.$router.push('/dashboard');
+      } else {
+        await writingController.updateWriting(this.wryterText, this.wryterTitle, this.id);
+        this.editingMode = false;
+        const el = document.querySelector('.card__textarea');
+        el.style.display = 'none';
+      }
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);

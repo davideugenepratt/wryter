@@ -49,9 +49,6 @@ export default {
   methods: {
     handleInput(e) {
       e.preventDefault();
-      console.log(this.title);
-      console.log(this.errors);
-
       if (this.title !== null) {
         return this.$emit('updateTitle', this.title);
       }

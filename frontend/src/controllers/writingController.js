@@ -10,6 +10,14 @@ const saveWriting = (text, title, unsplashResponse) => {
   // prevent router push to dashboard.
 };
 
+const updateWriting = (text, title, id) => {
+  axios.put(`${process.env.VUE_APP_API_ROOT}/writing/${id}`, {
+    text,
+    title,
+  });
+};
+
 module.exports = {
   saveWriting,
+  updateWriting,
 };
