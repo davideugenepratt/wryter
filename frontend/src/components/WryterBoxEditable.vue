@@ -1,40 +1,59 @@
 <template>
-  <div class="wryter-box container">
-    <div class="writing__text-content card" style="width:100%;">
-      <div class="card__edit-button">
-        <i class="bi-pencil" height="100px" width="100px"></i>
+  <div v-cloak class="wryter-box container">
+    <div v-if="!editingMode" class="writing__text-content card" style="width:100%;">
+      <div class="card__edit-button" target="_blank" href="#" v-on:click="toggleEditingMode">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-pencil-square"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1
+            .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805
+            2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0
+           0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5
+           0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          />
+        </svg>
       </div>
+
       <div class="card-body">
         <h5 class="card-title">{{ this.title }}</h5>
-        <h6 class="card-subtitle">{{ this.date }}</h6>
+        <h6 class="card-subtitle card__date">{{ new Date(this.date).toLocaleDateString() }}</h6>
         <p class="card-text">
           {{ this.text }}
         </p>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <div v-if="!this.editingMode" class="card">
-          <form @submit="openTitleModal">
-            <div class="form-group">
-              <textarea
-                class="form-control form-control-lg wryter-box-textarea lead"
-                rows="10"
-                :placeholder="this.id ? 'there\'s nothing worse than a blank page' : null"
-                v-model="wryterText"
-                v-on:input="updateTextAreaHeight"
-              >
-              </textarea>
-            </div>
-            <div class="form-group">
-              <button v-if="loggedIn" class="btn btn-secondary">Save Wryting</button>
-              <a href="#" v-else class="btn btn-secondary" @click="authModal">
-                Login or Register to Save
-              </a>
-            </div>
-          </form>
+    <div class="card__textarea">
+      <form @submit="openTitleModal">
+        <div class="form-group">
+          <textarea
+            autoFocus="autofocus"
+            class="form-control form-control-lg wryter-box-textarea lead"
+            rows="10"
+            :value="editable ? this.text : ''"
+            :v-model="editingMode ? this.text : this.wryterText"
+            :placeholder="this.editable ? null : 'there\'s nothing worse than a blank page'"
+            v-on:input="updateTextAreaHeight"
+            style="resize: none;"
+          >
+          </textarea>
         </div>
-      </div>
+        <div class="form-group">
+          <button v-if="loggedIn" class="btn btn-secondary">Save Wryting</button>
+          <a href="#" v-else class="btn btn-secondary" @click="authModal">
+            Login or Register to Save
+          </a>
+        </div>
+      </form>
     </div>
     <TitleModal :wryterTitle="wryterTitle" @updateTitle="updateTitle($event)" />
   </div>
@@ -59,7 +78,7 @@ export default {
   },
   data() {
     return {
-      editingMode: true,
+      editingMode: false,
       wryterText: '',
       wryterTitle: '',
       wordCount: 0,
@@ -144,15 +163,25 @@ export default {
       const { $ } = window;
       $('#titleModal').modal('show');
     },
+    toggleEditingMode() {
+      this.editingMode = !this.editingMode;
+      const el = document.querySelector('.card__textarea');
+      el.style.display = 'block';
+      const textArea = document.querySelector('.wryter-box-textarea');
+      textArea.style.fontSize = '14px';
+      textArea.style.height = 'inherit';
+      textArea.style.height = `${textArea.scrollHeight}px`;
+      textArea.focus();
+    },
     updateTitle(inputTitle) {
       this.wryterTitle = inputTitle;
       const { $ } = window;
       $('#titleModal').modal('hide');
       this.handleSubmit();
     },
+
     updateTextAreaHeight(event) {
       const el = event.currentTarget;
-      el.style.height = 'inherit';
       el.style.height = `${el.scrollHeight}px`;
     },
   },
@@ -160,6 +189,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+[v-cloak] {
+  display: none;
+}
+.card-text {
+  line-height: 1.6;
+  font-weight: 300;
+  white-space: pre-wrap;
+}
 .wryter-box.container {
   .word-count-goal {
     background: #fff;
@@ -196,19 +233,42 @@ export default {
   }
 
   .wryter-box-textarea {
+    height: 300px;
     padding: 30px;
     border: none;
     border-radius: 0;
-
     &:focus {
+      outline: none;
       background: #fff;
     }
+  }
+  .card__textarea {
+    display: none;
   }
 
   .wryter-box-title {
     background: #fff;
     font-size: 28px;
     height: 65px;
+  }
+  .card__edit-button {
+    float: right;
+  }
+  textarea:hover,
+  input:hover,
+  textarea:active,
+  input:active,
+  textarea:focus,
+  input:focus,
+  button:focus,
+  button:active,
+  button:hover,
+  label:focus,
+  .btn:active,
+  .btn.active {
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
   }
 }
 </style>

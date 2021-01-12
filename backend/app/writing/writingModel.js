@@ -8,12 +8,12 @@ var writingSchema = new Schema({
   author: { type: String, required: true, index: true },
   unsplashResponse: Object,
   created: {
-    type: Date,
-    default: Date.now(),
+    type: Object,
+    default: new Date(),
   },
   updated: {
-    type: Date,
-    default: Date.now(),
+    type: Object,
+    default: new Date(),
   },
 });
 

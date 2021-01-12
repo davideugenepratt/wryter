@@ -41,8 +41,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log('checking token');
   if (AuthHelper.checkToken()) {
-    console.log('dispatching login');
-
     store.dispatch('login');
     next();
   } else {
@@ -55,8 +53,6 @@ router.beforeEach((to, from, next) => {
       store.dispatch('login');
       next();
     } else {
-      const { $ } = window;
-      $('#authModal').modal('show');
       store.dispatch('logout');
       next({
         path: '/',
