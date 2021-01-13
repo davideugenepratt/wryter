@@ -34,7 +34,7 @@
             </ul>
           </li>
           <li v-else>
-            <a href="#" class="btn btn-secondary" @click="authModal">
+            <a href="#" @click="authModal">
               Login or Register
             </a>
           </li>
