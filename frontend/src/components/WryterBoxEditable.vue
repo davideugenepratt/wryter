@@ -48,10 +48,9 @@
           <textarea
             :class="{ editing: this.editable }"
             class="form-control form-control-lg wryter-box-textarea lead"
-            rows="10"
+            rows="5"
             v-model="wryterText"
             :placeholder="this.editable ? null : 'there\'s nothing worse than a blank page'"
-            v-on:input="updateTextAreaHeight"
             style="resize: none;"
           >
           </textarea>
@@ -163,7 +162,7 @@ export default {
       el.style.display = 'block';
       const textArea = document.querySelector('.wryter-box-textarea');
       textArea.style.fontSize = '14px';
-      textArea.style.height = 'inherit';
+      // textArea.style.height = 'inherit';
       textArea.style.height = `${textArea.scrollHeight}px`;
     },
     updateTitle(inputTitle) {
@@ -171,11 +170,6 @@ export default {
       const { $ } = window;
       $('#titleModal').modal('hide');
       this.handleSubmit();
-    },
-
-    updateTextAreaHeight(event) {
-      const el = event.currentTarget;
-      el.style.height = `${el.scrollHeight}px`;
     },
   },
 };
@@ -226,7 +220,7 @@ export default {
   }
 
   .wryter-box-textarea {
-    height: 300px;
+    height: auto;
     padding: 30px;
     border: none;
     border-radius: 0;
@@ -250,6 +244,11 @@ export default {
   }
   .card__edit-button {
     float: right;
+    transition: scale 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
   }
   textarea:hover,
   input:hover,
