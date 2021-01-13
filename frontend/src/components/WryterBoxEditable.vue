@@ -37,10 +37,16 @@
       </div>
     </div>
     <div class="card__textarea">
+      <div class="form-group">
+        <label for="inputUsername" class="">{{
+          this.editable ? '' : 'Give your writing a title!'
+        }}</label>
+        <input type="text" v-model="wryterTitle" class="form-control" required autofocus />
+      </div>
       <form @submit="handleSubmit">
         <div class="form-group">
           <textarea
-            autoFocus="autofocus"
+            :class="{ editing: this.editable }"
             class="form-control form-control-lg wryter-box-textarea lead"
             rows="10"
             v-model="wryterText"
@@ -159,7 +165,6 @@ export default {
       textArea.style.fontSize = '14px';
       textArea.style.height = 'inherit';
       textArea.style.height = `${textArea.scrollHeight}px`;
-      textArea.focus();
     },
     updateTitle(inputTitle) {
       this.wryterTitle = inputTitle;
@@ -229,6 +234,10 @@ export default {
       outline: none;
       background: #fff;
     }
+  }
+  .editing {
+    border: 2px solid rgba(28, 28, 28, 0.15);
+    border-radius: 5px;
   }
   .card__textarea {
     display: none;

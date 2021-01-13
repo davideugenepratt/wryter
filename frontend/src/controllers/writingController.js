@@ -11,10 +11,12 @@ const saveWriting = (text, title, unsplashResponse) => {
 };
 
 const updateWriting = (text, title, id) => {
-  axios.put(`${process.env.VUE_APP_API_ROOT}/writing/${id}`, {
-    text,
-    title,
-  });
+  axios
+    .put(`${process.env.VUE_APP_API_ROOT}/writing/${id}`, {
+      text,
+      title,
+    })
+    .then((response) => console.log(response));
 };
 
 module.exports = {

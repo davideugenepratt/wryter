@@ -55,11 +55,8 @@ let getWriting = function (req, res) {
 };
 
 let editWriting = async function (req, res) {
-  console.log('******in the edit writing controller method');
-  console.log(req.body);
-  console.log(req.params.id);
-
   const id = req.params.id;
+
   await Writing.findOneAndUpdate({ _id: id }, req.body, {
     useFindAndModify: false,
     new: true,
