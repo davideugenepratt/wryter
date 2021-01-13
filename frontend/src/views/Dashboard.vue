@@ -8,10 +8,7 @@
       <div class="row">
         <h5 class="section-title sans text-center">Your Wryting Stats</h5>
         <div class="thin text-center">
-          <p>Donec id elit non mi porta gravida at eget metus. Etiam porta sem
-          malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod.
-          Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam
-          id dolor id nibh ultricies vehicula ut id elit.</p>
+          <p></p>
         </div>
         <div class="divide10"></div>
         <div class="row text-center facts">
@@ -23,14 +20,14 @@
           <!--/column -->
           <div class="col-sm-4">
             <div class="icon-large"> <i class="icon-docs"></i> </div>
-            <h2 class="sans">3472</h2>
-            <p>Different Writings</p>
+            <h2 class="sans">342</h2>
+            <p>Wrytings</p>
           </div>
           <!--/column -->
           <div class="col-sm-4">
             <div class="icon-large"> <i class="icon-calendar-1"></i> </div>
-            <h2 class="sans">2184</h2>
-            <p>Days This Month</p>
+            <h2 class="sans">27</h2>
+            <p>Days In a Row</p>
           </div>
           <!--/column -->
         </div>
