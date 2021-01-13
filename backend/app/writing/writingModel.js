@@ -2,12 +2,18 @@ var mongoose = require('../../db');
 var Schema = mongoose.Schema;
 
 var writingSchema = new Schema({
-    writing: String,
-    author: {type: String, default: ''},
-    date: {
+    text: String,
+    title: String,
+    author: {type: String, required: true, index: true},
+    unsplashResponse: Object,
+    created: {
         type: Date,
         default: Date.now()
-    }
+    },
+    updated:  {
+        type: Date,
+        default: Date.now()
+    },
 });
 
 var Writing = module.exports = mongoose.model('Writing', writingSchema);
