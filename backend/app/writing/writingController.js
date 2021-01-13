@@ -16,19 +16,20 @@ let createWriting = function(req, res) {
 };
 
 let getAllWritings = function(req, res){
-  Writing.find({author: req.user.username}, '_id title unsplashResponse.urls created').then(writings => {
-    res.json({
-      writings,
-      stats: {},
-    });
+  Writing.find().then(items => {
+    res.json(items);
   }).catch((err) => {
     res.status(err.code).json(err);
   });
 };
 
 let getAllWritingsForUser = function(req, res){
-  Writing.find().then(items => {
-    res.json(items);
+  Writing.find({author: req.user.username}, '_id title unsplashResponse.urls created').then(writings => {
+    console.log(writings);
+    res.json({
+      writings,
+      stats: {},
+    });
   }).catch((err) => {
     res.status(err.code).json(err);
   });

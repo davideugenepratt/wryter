@@ -5,10 +5,13 @@ var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
 let register = function(req, res, next) {
-  res.json({success: true});
-  console.log(req.body)
+  let errorMessage = 'There was an error processing your request.';
+  let errorReason = 'ERROR';
+
   if (!validatePassword(req.body.password)){
-    console.error('invalid password');
+    errorMessage = 'Invalid password.';
+    errorReason = 'INVALIDPASSWORD';
+    res.status(error.code).json({errorMessage, errorReason});
     return;
   }
 
@@ -19,8 +22,14 @@ let register = function(req, res, next) {
   
   var result = User.createUser(user).then(function(response){
     res.json(response);
-  }).catch(function(error){
-    res.status(error.code).json(error);
+  }).catch(function(error){    
+    // TODO: Probably should use an enum here eventually; moving on for now.
+    if (error.error.code === 11000) {
+      errorMessage = 'This email is already in use.';
+      errorReason = 'EMAILEXISTS';
+    }
+
+    res.status(error.code).json({errorMessage, errorReason});
   });
 };
 
