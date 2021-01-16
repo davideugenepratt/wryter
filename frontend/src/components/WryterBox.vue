@@ -59,16 +59,14 @@ export default {
   },
   methods: {
     handleSubmit(e) {
-      const self = this;
+      // const self = this;
       e.preventDefault();
 
-      writingController.saveWriting(
+      console.log(writingController, writingController.saveWriting, writingController.saveWriting(
         this.wryterText,
         this.wryterTitle,
         this.$store.state.unsplashResponse,
-      ).then(() => {
-        self.$router.push('/dashboard');
-      });
+      ));
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);
