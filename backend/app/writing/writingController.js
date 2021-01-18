@@ -3,10 +3,13 @@ const { default: slugify } = require('slugify');
 let Writing = require('./writingModel');
 
 let createWriting = function (req, res) {
+  const title = req.body.text.split(' ').slice(0, 3).join(' ');
+  console.log(`title: ${title}`);
+
   const newWriting = new Writing({
     text: req.body.text,
-    title: req.body.title,
-    slug: slugify(req.body.title),
+    title: title,
+    slug: slugify(title),
     author: req.user.username,
     unsplashResponse: req.body.unsplashResponse,
   });
@@ -44,8 +47,8 @@ let getAllWritingsForUser = function (req, res) {
 };
 
 let getWriting = function (req, res) {
-  const id = req.params.id;
-  Writing.findById(id)
+  const slug = req.params.slug;
+  Writing.findOne({ slug: slug })
     .then((items) => {
       res.json(items);
     })

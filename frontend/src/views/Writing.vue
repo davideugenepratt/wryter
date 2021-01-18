@@ -7,7 +7,7 @@
       <wryterBoxEditable
         class="writing__text-content"
         :editable="true"
-        :id="this.$route.params.id || null"
+        :id="this.writingId || null"
         :text="this.writingText"
         :title="this.writingTitle"
         :date="this.writingDate"
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       loading: true,
+      writingId: '',
       writingText: '',
       writingTitle: '',
       writingDate: '',
@@ -52,9 +53,11 @@ export default {
       // TODO set loading state logic in store
       // Make API request
       await axios
-        .get(`${process.env.VUE_APP_API_ROOT}/writing/${this.$route.params.id}`)
+        .get(`${process.env.VUE_APP_API_ROOT}/writing/${this.$route.params.slug}`)
         .then((response) => {
           const { data } = response;
+          /* eslint no-underscore-dangle: 0 */
+          this.writingId = data._id;
           this.writingText = data.text;
           this.writingTitle = data.title;
           this.writingDate = data.created;

@@ -26,31 +26,32 @@
 </template>
 
 <script>
-import * as writingController from "../controllers/writingController";
+import * as writingController from '../controllers/writingController';
+
 export default {
-  name: "WryterBox",
+  name: 'WryterBox',
   components: {},
   computed: {
     loggedIn() {
       return this.$store.state.loggedIn;
-    }
+    },
   },
   data() {
     return {
-      wryterText: "",
+      wryterText: '',
       wordCount: 0,
       wordGoal: 250,
       minutesRemaining: this.formatNumberforTimeCode(0),
       secondsRemaining: this.formatNumberforTimeCode(0),
       timeSelected: 0,
       countdownInterval: null,
-      timerProgress: 100
+      timerProgress: 100,
     };
   },
   watch: {
     wryterText(val) {
-      this.wordCount = !/\S/.test(val) || val === "0" ? 0 : val.match(/\w+/g).length;
-    }
+      this.wordCount = !/\S/.test(val) || val === '0' ? 0 : val.match(/\w+/g).length;
+    },
   },
   methods: {
     async handleSubmit() {
@@ -60,7 +61,7 @@ export default {
       // Must have at least a title or text and it must have an image attatched
       await writingController.saveWriting(this.wryterText, this.$store.state.unsplashResponse);
 
-      self.$router.push("/dashboard");
+      self.$router.push('/dashboard');
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);
@@ -88,20 +89,20 @@ export default {
     authModal(e) {
       e.preventDefault();
       const { $ } = window;
-      $("#authModal").modal("show");
+      $('#authModal').modal('show');
     },
     updateTitle(inputTitle) {
       this.wryterTitle = inputTitle;
       const { $ } = window;
-      $("#titleModal").modal("hide");
+      $('#titleModal').modal('hide');
       this.handleSubmit();
     },
     updateTextAreaHeight(event) {
       const el = event.currentTarget;
-      el.style.height = "inherit";
+      el.style.height = 'inherit';
       el.style.height = `${el.scrollHeight}px`;
-    }
-  }
+    },
+  },
 };
 </script>
 
