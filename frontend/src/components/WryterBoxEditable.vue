@@ -39,7 +39,7 @@
     <div class="card__textarea">
       <div class="form-group">
         <label for="inputUsername" class="">{{
-          this.editable ? '' : 'Give your writing a title!'
+          this.editable ? "" : "Give your writing a title!"
         }}</label>
         <input type="text" v-model="wryterTitle" class="form-control" required autofocus />
       </div>
@@ -63,43 +63,39 @@
         </div>
       </form>
     </div>
-    <TitleModal :wryterTitle="wryterTitle" @updateTitle="updateTitle($event)" />
   </div>
 </template>
 
 <script>
-import * as writingController from '../controllers/writingController';
-import TitleModal from './TitleModal.vue';
+import * as writingController from "../controllers/writingController";
 
 export default {
-  name: 'WryterBoxEditable',
-  props: ['title', 'text', 'date', 'id', 'editable'],
-  components: {
-    TitleModal,
-  },
+  name: "WryterBoxEditable",
+  props: ["title", "text", "date", "id", "editable"],
+  components: {},
   computed: {
     loggedIn() {
       return this.$store.state.loggedIn;
-    },
+    }
   },
   data() {
     return {
       editingMode: false,
-      wryterText: this.text || '',
-      wryterTitle: this.title || '',
+      wryterText: this.text || "",
+      wryterTitle: this.title || "",
       wordCount: 0,
       wordGoal: 250,
       minutesRemaining: this.formatNumberforTimeCode(0),
       secondsRemaining: this.formatNumberforTimeCode(0),
       timeSelected: 0,
       countdownInterval: null,
-      timerProgress: 100,
+      timerProgress: 100
     };
   },
   watch: {
     wryterText(val) {
-      this.wordCount = !/\S/.test(val) || val === '0' ? 0 : val.match(/\w+/g).length;
-    },
+      this.wordCount = !/\S/.test(val) || val === "0" ? 0 : val.match(/\w+/g).length;
+    }
   },
   methods: {
     async handleSubmit(e) {
@@ -113,14 +109,14 @@ export default {
         await writingController.saveWriting(
           this.wryterText,
           this.wryterTitle,
-          this.$store.state.unsplashResponse,
+          this.$store.state.unsplashResponse
         );
-        self.$router.push('/dashboard');
+        self.$router.push("/dashboard");
       } else {
         await writingController.updateWriting(this.wryterText, this.wryterTitle, this.id);
         this.editingMode = false;
-        const el = document.querySelector('.card__textarea');
-        el.style.display = 'none';
+        const el = document.querySelector(".card__textarea");
+        el.style.display = "none";
       }
     },
     timer(minutes) {
@@ -149,29 +145,24 @@ export default {
     authModal(e) {
       e.preventDefault();
       const { $ } = window;
-      $('#authModal').modal('show');
-    },
-    openTitleModal(e) {
-      e.preventDefault();
-      const { $ } = window;
-      $('#titleModal').modal('show');
+      $("#authModal").modal("show");
     },
     toggleEditingMode() {
       this.editingMode = !this.editingMode;
-      const el = document.querySelector('.card__textarea');
-      el.style.display = 'block';
-      const textArea = document.querySelector('.wryter-box-textarea');
-      textArea.style.fontSize = '14px';
+      const el = document.querySelector(".card__textarea");
+      el.style.display = "block";
+      const textArea = document.querySelector(".wryter-box-textarea");
+      textArea.style.fontSize = "14px";
       // textArea.style.height = 'inherit';
       textArea.style.height = `${textArea.scrollHeight}px`;
     },
     updateTitle(inputTitle) {
       this.wryterTitle = inputTitle;
       const { $ } = window;
-      $('#titleModal').modal('hide');
+      $("#titleModal").modal("hide");
       this.handleSubmit();
-    },
-  },
+    }
+  }
 };
 </script>
 

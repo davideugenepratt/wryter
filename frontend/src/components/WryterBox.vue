@@ -2,7 +2,7 @@
   <div class="wryter-box container">
     <div class="row">
       <div class="col-12">
-        <form @submit="openTitleModal">
+        <form @submit="handleSubmit">
           <div class="form-group">
             <textarea
               class="form-control form-control-lg wryter-box-textarea lead"
@@ -22,41 +22,35 @@
         </form>
       </div>
     </div>
-    <TitleModal :wryterTitle="wryterTitle" @updateTitle="updateTitle($event)" />
   </div>
 </template>
 
 <script>
-import * as writingController from '../controllers/writingController';
-import TitleModal from './TitleModal.vue';
-
+import * as writingController from "../controllers/writingController";
 export default {
-  name: 'WryterBox',
-  components: {
-    TitleModal,
-  },
+  name: "WryterBox",
+  components: {},
   computed: {
     loggedIn() {
       return this.$store.state.loggedIn;
-    },
+    }
   },
   data() {
     return {
-      wryterText: '',
-      wryterTitle: '',
+      wryterText: "",
       wordCount: 0,
       wordGoal: 250,
       minutesRemaining: this.formatNumberforTimeCode(0),
       secondsRemaining: this.formatNumberforTimeCode(0),
       timeSelected: 0,
       countdownInterval: null,
-      timerProgress: 100,
+      timerProgress: 100
     };
   },
   watch: {
     wryterText(val) {
-      this.wordCount = !/\S/.test(val) || val === '0' ? 0 : val.match(/\w+/g).length;
-    },
+      this.wordCount = !/\S/.test(val) || val === "0" ? 0 : val.match(/\w+/g).length;
+    }
   },
   methods: {
     async handleSubmit() {
@@ -64,13 +58,9 @@ export default {
       // e.preventDefault();
       // TODO error handling for empty values.
       // Must have at least a title or text and it must have an image attatched
-      await writingController.saveWriting(
-        this.wryterText,
-        this.wryterTitle,
-        this.$store.state.unsplashResponse,
-      );
+      await writingController.saveWriting(this.wryterText, this.$store.state.unsplashResponse);
 
-      self.$router.push('/dashboard');
+      self.$router.push("/dashboard");
     },
     timer(minutes) {
       clearInterval(this.countdownInterval);
@@ -98,25 +88,20 @@ export default {
     authModal(e) {
       e.preventDefault();
       const { $ } = window;
-      $('#authModal').modal('show');
-    },
-    openTitleModal(e) {
-      e.preventDefault();
-      const { $ } = window;
-      $('#titleModal').modal('show');
+      $("#authModal").modal("show");
     },
     updateTitle(inputTitle) {
       this.wryterTitle = inputTitle;
       const { $ } = window;
-      $('#titleModal').modal('hide');
+      $("#titleModal").modal("hide");
       this.handleSubmit();
     },
     updateTextAreaHeight(event) {
       const el = event.currentTarget;
-      el.style.height = 'inherit';
+      el.style.height = "inherit";
       el.style.height = `${el.scrollHeight}px`;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -164,12 +149,6 @@ export default {
     &:focus {
       background: #fff;
     }
-  }
-
-  .wryter-box-title {
-    background: #fff;
-    font-size: 28px;
-    height: 65px;
   }
 }
 </style>
