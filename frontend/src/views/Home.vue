@@ -2,6 +2,7 @@
   <div id="home-container">
     <UnsplashImage />
     <WryterBox />
+    <TourGuide />
   </div>
 </template>
 
@@ -10,13 +11,14 @@
 import $ from 'jquery';
 import UnsplashImage from '../components/UnsplashImage.vue';
 import WryterBox from '../components/WryterBox.vue';
-
+import TourGuide from '../components/TourGuide.vue';
 
 export default {
   name: 'Home',
   components: {
     UnsplashImage,
     WryterBox,
+    TourGuide,
   },
   data() {
     return {
