@@ -14,19 +14,19 @@
         <div class="row text-center facts">
           <div class="col-sm-4">
             <div class="icon-large"><i class="icon-pencil"></i></div>
-            <h2 class="sans">7518</h2>
+            <h2 class="sans count-up">{{ words }}</h2>
             <p>Words Written</p>
           </div>
           <!--/column -->
           <div class="col-sm-4">
-            <div class="icon-large"> <i class="icon-docs"></i> </div>
-            <h2 class="sans">342</h2>
+            <div class="icon-large"><i class="icon-docs"></i></div>
+            <h2 class="sans count-up">{{ writings.length }}</h2>
             <p>Wrytings</p>
           </div>
           <!--/column -->
           <div class="col-sm-4">
-            <div class="icon-large"> <i class="icon-calendar-1"></i> </div>
-            <h2 class="sans">27</h2>
+            <div class="icon-large"><i class="icon-calendar-1"></i></div>
+            <h2 class="sans count-up">27</h2>
             <p>Days In a Row</p>
           </div>
           <!--/column -->
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import { animateCount } from '../helpers/animationHelpers';
+
 const axios = require('axios').default;
 
 export default {
@@ -66,20 +68,61 @@ export default {
   data() {
     return {
       writings: [],
+      words: 2965,
+      // ***These arent hooked up to the backend yet below** they fail with axios call
       stats: {
         words: '2965',
         writings: '74',
         days: '35',
       },
+      test: 'hello',
     };
   },
   beforeMount() {
     const self = this;
-    axios.get(`${process.env.VUE_APP_API_ROOT}/writing/`).then((response) => {
-      self.writings = response.data.writings;
-      self.stats = response.data.stats;
-      console.log(self.writings);
+    try {
+      axios.get(`${process.env.VUE_APP_API_ROOT}/writing/`).then((response) => {
+        self.writings = response.data.writings;
+        self.stats = response.data.stats;
+      });
+    } catch {
+      console.log('error');
+    }
+  },
+  mounted() {
+    // await get writings
+    // run helper functions
+    // put data in variables and v-bind them to the data elements
+    // ** maybe use an animation library to have them count up**
+    const stats = Object.keys(this.stats);
+    stats.forEach((stat) => {
+      console.log(stat);
+
+      // this.countUp(stat);
     });
+
+    const countElements = document.querySelectorAll('.count-up');
+    countElements.forEach((el) => {
+      animateCount(el);
+    });
+  },
+  methods: {
+    countUp(prop) {
+      console.log(this.stats[prop]);
+      this.stats[prop] = 0;
+
+      let count = 0;
+      // const frameDuration = 2000 / 60;
+      const counter = setInterval(() => {
+        console.log(this.stats[prop]);
+
+        count += 1;
+        if (count === 10) {
+          clearInterval(counter);
+        }
+      }, 1000);
+      // console.log(counter);
+    },
   },
 };
 </script>
