@@ -20,7 +20,9 @@
             id="inputUsername"
             class="form-control"
             placeholder="Email address"
-            required autofocus>
+            required
+            autofocus
+          />
         </div>
         <div class="form-group">
           <label for="inputPassword" class="sr-only ">Password</label>
@@ -29,7 +31,8 @@
             v-model="password"
             id="inputPassword"
             class="form-control"
-            placeholder="Password">
+            placeholder="Password"
+          />
         </div>
         <div class="form-group">
           <button class="btn btn-lg btn-primary btn-block mt-3" id="loginButton">Login</button>
@@ -58,23 +61,25 @@ export default {
       const self = this;
       const { $ } = window;
       e.preventDefault();
-      authController.login(this.username, this.password).then(() => {
-        self.$store.dispatch('login');
-        self.$router.push('/');
-        $('#authModal').modal('hide');
-      }, () => {
-        this.responseError = true;
-      });
+      authController.login(this.username, this.password).then(
+        () => {
+          self.$store.dispatch('login');
+          $('#authModal').modal('hide');
+        },
+        () => {
+          this.responseError = true;
+        },
+      );
     },
   },
 };
 </script>
 
-<style lang="scss" >
-  .form-signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: 0 auto;
-  }
+<style lang="scss">
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
 </style>
