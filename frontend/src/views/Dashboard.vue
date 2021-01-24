@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { animateCount } from '../helpers/animationHelpers';
+// import { animateCount } from '../helpers/animationHelpers';
 
 const axios = require('axios').default;
 
@@ -103,7 +103,7 @@ export default {
 
     const countElements = document.querySelectorAll('.count-up');
     countElements.forEach((el) => {
-      animateCount(el);
+      // animateCount(el);
     });
   },
   methods: {
