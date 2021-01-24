@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Get a random writing prompt every day.",
   "main": "index.js",
+  "engines" : { 
+    "node" : "10.16.0" 
+  },
   "scripts": {
     "clean": "rm -rf ./frontend/node_modules && rm -rf ./backend/node_modules/ && npm run install",
     "build": "cd frontend && ./node_modules/.bin/vue-cli-service build",
