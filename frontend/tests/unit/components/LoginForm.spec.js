@@ -9,7 +9,6 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('LoginForm.vue', () => {
-
   const $router = {
     push: () => {},
   };
