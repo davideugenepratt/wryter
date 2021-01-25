@@ -31,7 +31,7 @@ Make sure you have all the following dependencies installed:
 
 2) Install all packages:
     - `cd frontend`
-    - `npm install`
+    - `yarn install`
 
 ### Starting a New Feature
 
