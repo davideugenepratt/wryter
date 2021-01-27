@@ -8,7 +8,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./frontend/node_modules && rm -rf ./backend/node_modules/ && npm run install",
-    "build": "ls -l && ./frontend/node_modules/.bin/vue-cli-service build",
+    "build": "ls -l ./frontend && ls -l ./frontend/node_modules && ./frontend/node_modules/.bin/vue-cli-service build",
     "install": "yarn --cwd ./frontend install && yarn --cwd ./backend install",
     "start": "npm run start:production --prefix backend",
     "start:dev": "npm run start:backend & npm run start:frontend",
