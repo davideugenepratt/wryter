@@ -4,7 +4,7 @@
   "description": "Get a random writing prompt every day.",
   "main": "index.js",
   "engines" : { 
-    "node" : "12.20.1" 
+    "node" : "14.15.x" 
   },
   "scripts": {
     "clean": "rm -rf ./frontend/node_modules && rm -rf ./backend/node_modules/ && npm run install",
@@ -18,7 +18,7 @@
     "test": "npm run test:frontend && npm run test:backend",
     "test:frontend": "trap 'kill %1; echo killed' ERR EXIT; npm run start:backend:test & npm run test --prefix frontend",
     "test:backend": "npm run test --prefix backend",
-    "heroku-postbuild": "yarn --cwd frontend install --only=dev --no-shrinkwrap && yarn run build"
+    "heroku-postbuild": "yarn --cwd frontend install && yarn run build"
   },
   "repository": {
     "type": "git",
