@@ -5,10 +5,7 @@ var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
 let register = function(req, res, next) {
-  res.json({success: true});
-  console.log(req.body)
   if (!validatePassword(req.body.password)){
-    console.error('invalid password');
     return;
   }
 
