@@ -12,6 +12,6 @@ mongoose.connection.on('error', function(err) {
 
 console.log('test23242323', schema + authString + hostname + portString + '/' + database);
 
-mongoose.connect(schema + authString + hostname + portSeperator + port + '/' + database , function(){});
+mongoose.connect(schema + authString + hostname + portString + '/' + database , function(){});
 
 module.exports = mongoose;
