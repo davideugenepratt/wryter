@@ -10,8 +10,6 @@ mongoose.connection.on('error', function(err) {
     console.error('MongoDB error: %s', err);
 });
 
-console.log('test23242323', port === false, schema + authString + hostname + portString + '/' + database);
-
 mongoose.connect(schema + authString + hostname + portString + '/' + database , function(){});
 
 module.exports = mongoose;
