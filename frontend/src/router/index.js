@@ -4,6 +4,7 @@ import store from '../store';
 import AuthHelper from '../helpers/authHelper';
 import Home from '../views/Home.vue';
 import Dashboard from '../views/Dashboard.vue';
+import Writing from '../views/Writing.vue';
 
 Vue.use(VueRouter);
 
@@ -21,14 +22,31 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    name: 'writing',
+    path: '/writing/:slug',
+    component: Writing,
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: '/',
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  console.log('checking token');
+  if (AuthHelper.checkToken()) {
+    store.dispatch('login');
+    next();
+  } else {
+    next();
+  }
+});
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (AuthHelper.checkToken()) {
@@ -37,7 +55,7 @@ router.beforeEach((to, from, next) => {
     } else {
       store.dispatch('logout');
       next({
-        path: '/login',
+        path: '/',
         params: { nextUrl: to.fullPath },
       });
     }
