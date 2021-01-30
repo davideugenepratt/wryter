@@ -3,7 +3,7 @@
     <Header />
     <main role="main">
       <div id="app" class="d-flex justify-content-center flex-column h-100">
-        <router-view/>
+        <router-view />
       </div>
     </main>
     <Footer />
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss">
-  body {
-    // overflow: hidden;
-  }
+body {
+  // overflow: hidden;
+}
 </style>
