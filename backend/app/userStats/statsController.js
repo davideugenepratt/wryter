@@ -1,23 +1,33 @@
 const Writing = require('../writing/writingModel');
 const Stats = require('./statsModel');
 
-const createStats = (req, res) => {
-  // create some stats initialized to 0;
-  const newStats = new Stats({
-    userId: req.user.username,
-    writingCount: 0,
-    wordCount: 0,
-    writingStreakInDays: 0,
-  });
-
-  newStats
-    .save()
-    .then((response) => {
-      res.json(response);
-    })
-    .catch((err) => {
-      res.status(err.code).json(err);
+const createStats = (userName) => {
+  var promise = new Promise((resolve, reject) => {
+    const newStats = new Stats({
+      userId: userName,
+      writingCount: 0,
+      wordCount: 0,
+      writingStreakInDays: 0,
     });
+
+    newStats
+      .save()
+      .then((response) => {
+        esolve({ success: true });
+      })
+      .catch((err) => {
+        reject({
+          success: false,
+          code: 500,
+          error: {
+            code: err.code,
+            errmsg: err.errmsg,
+            keyPattern: err.keyPattern,
+            keyValue: err.keyValue,
+          },
+        });
+      });
+  });
 };
 
 const updateStats = (req, res) => {
