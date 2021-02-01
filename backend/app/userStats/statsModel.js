@@ -2,7 +2,7 @@ var mongoose = require('../../db');
 var Schema = mongoose.Schema;
 
 const statsSchema = new Schema({
-  userId: { type: String, required: true, index: true },
+  userId: { type: String, unique: true, required: true },
   writingCount: { type: Number },
   wordCount: { type: Number },
   writingStreakInDays: { type: Number },

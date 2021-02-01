@@ -102,7 +102,7 @@ export default {
     });
 
     const countElements = document.querySelectorAll('.count-up');
-    countElements.forEach((el) => {
+    countElements.forEach(() => {
       // animateCount(el);
     });
   },
