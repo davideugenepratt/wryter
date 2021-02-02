@@ -30,6 +30,15 @@ const createStats = (userName) => {
       });
   });
 };
+const getStatsForUser = (req, res) => {
+  Stats.find({ userId: req.user.username }, 'writingCount wordCount writingStreakInDays')
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.status(err.code).json(err);
+    });
+};
 
 const updateStats = async (userName) => {
   try {
