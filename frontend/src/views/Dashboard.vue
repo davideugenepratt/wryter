@@ -14,19 +14,19 @@
         <div class="row text-center facts">
           <div class="col-sm-4">
             <div class="icon-large"><i class="icon-pencil"></i></div>
-            <h2 class="sans count-up">{{ words }}</h2>
+            <h2 class="sans count-up">{{ stats.words }}</h2>
             <p>Words Written</p>
           </div>
           <!--/column -->
           <div class="col-sm-4">
             <div class="icon-large"><i class="icon-docs"></i></div>
-            <h2 class="sans count-up">{{ writings.length }}</h2>
+            <h2 class="sans count-up">{{ stats.writings }}</h2>
             <p>Wrytings</p>
           </div>
           <!--/column -->
           <div class="col-sm-4">
             <div class="icon-large"><i class="icon-calendar-1"></i></div>
-            <h2 class="sans count-up">27</h2>
+            <h2 class="sans count-up">{{ stats.days }}</h2>
             <p>Days In a Row</p>
           </div>
           <!--/column -->
@@ -71,9 +71,9 @@ export default {
       words: 2965,
       // ***These arent hooked up to the backend yet below** they fail with axios call
       stats: {
-        words: '2965',
-        writings: '74',
-        days: '35',
+        words: 0,
+        writings: 0,
+        days: 0,
       },
       test: 'hello',
     };
@@ -81,28 +81,51 @@ export default {
   beforeMount() {
     const self = this;
     try {
-      axios.get(`${process.env.VUE_APP_API_ROOT}/writing/`).then((response) => {
-        self.writings = response.data.writings;
-        self.stats = response.data.stats;
-      });
+      axios
+        .get(`${process.env.VUE_APP_API_ROOT}/writing/`)
+        .then((response) => {
+          self.writings = response.data.writings;
+          console.log(self.writings);
+        })
+        .then(() => {
+          axios.get(`${process.env.VUE_APP_API_ROOT}/userstats/`).then((response) => {
+            console.log(response);
+
+            self.stats = {
+              words: response.data.stats.wordCount,
+              writings: response.data.stats.writingCount,
+              days: response.data.stats.writingStreakInDays,
+            };
+            console.log(self.stats);
+          });
+        });
     } catch {
       console.log('error');
     }
   },
   mounted() {
+    const self = this;
     // await get writings
     // run helper functions
     // put data in variables and v-bind them to the data elements
     // ** maybe use an animation library to have them count up**
     const stats = Object.keys(this.stats);
     stats.forEach((stat) => {
-      console.log(stat);
+      console.log(`${stat}: ${self.stats[stat]}`);
 
       // this.countUp(stat);
     });
 
     const countElements = document.querySelectorAll('.count-up');
     countElements.forEach(() => {
+      let frame = 0;
+      const counter = setInterval(() => {
+        console.log(frame);
+        frame += 1;
+        if (frame === 10) {
+          clearInterval(counter);
+        }
+      }, 1000);
       // animateCount(el);
     });
   },

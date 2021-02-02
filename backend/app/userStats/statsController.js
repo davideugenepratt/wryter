@@ -30,10 +30,12 @@ const createStats = (userName) => {
       });
   });
 };
-const getStatsForUser = (req, res) => {
-  Stats.find({ userId: req.user.username }, 'writingCount wordCount writingStreakInDays')
-    .then((response) => {
-      res.json(response);
+let getStatsForUser = function (req, res) {
+  Stats.findOne({ userId: req.user.username }, 'writingCount wordCount  writingStreakInDays')
+    .then((stats) => {
+      console.log(stats);
+
+      res.json({ stats });
     })
     .catch((err) => {
       res.status(err.code).json(err);
@@ -66,7 +68,7 @@ const updateStats = async (userName) => {
   //   save as object with new stats
   // find stats and update with username and new stats
 };
-module.exports = { createStats, updateStats };
+module.exports = { createStats, updateStats, getStatsForUser };
 
 // flow on create User
 //  call the createStats function

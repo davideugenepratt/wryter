@@ -30,7 +30,6 @@ let getAllWritings = function (req, res) {
     .then((writings) => {
       res.json({
         writings,
-        stats: {},
       });
     })
     .catch((err) => {
