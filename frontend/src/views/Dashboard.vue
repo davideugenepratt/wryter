@@ -14,19 +14,19 @@
         <div class="row text-center facts">
           <div class="col-sm-4">
             <div class="icon-large"><i class="icon-pencil"></i></div>
-            <h2 class="sans count-up">{{ stats.words }}</h2>
+            <h2 class="sans count-up" :data-countUpValue="stats.words"></h2>
             <p>Words Written</p>
           </div>
           <!--/column -->
           <div class="col-sm-4">
             <div class="icon-large"><i class="icon-docs"></i></div>
-            <h2 class="sans count-up">{{ stats.writings }}</h2>
+            <h2 class="sans count-up" :data-countUpValue="stats.writings"></h2>
             <p>Wrytings</p>
           </div>
           <!--/column -->
           <div class="col-sm-4">
             <div class="icon-large"><i class="icon-calendar-1"></i></div>
-            <h2 class="sans count-up">{{ stats.days }}</h2>
+            <h2 class="sans count-up" :data-countUpValue="stats.days"></h2>
             <p>Days In a Row</p>
           </div>
           <!--/column -->
@@ -71,9 +71,9 @@ export default {
       words: 2965,
       // ***These arent hooked up to the backend yet below** they fail with axios call
       stats: {
-        words: 0,
-        writings: 0,
-        days: 0,
+        words: null,
+        writings: null,
+        days: null,
       },
       test: 'hello',
     };
@@ -89,62 +89,59 @@ export default {
         })
         .then(() => {
           axios.get(`${process.env.VUE_APP_API_ROOT}/userstats/`).then((response) => {
-            console.log(response);
-
             self.stats = {
               words: response.data.stats.wordCount,
               writings: response.data.stats.writingCount,
               days: response.data.stats.writingStreakInDays,
             };
-            console.log(self.stats);
+
+            // run animation from here passing the values from db as the end values in the function
           });
         });
     } catch {
       console.log('error');
     }
   },
-  mounted() {
-    const self = this;
+  updated() {
     // await get writings
     // run helper functions
     // put data in variables and v-bind them to the data elements
     // ** maybe use an animation library to have them count up**
-    const stats = Object.keys(this.stats);
-    stats.forEach((stat) => {
-      console.log(`${stat}: ${self.stats[stat]}`);
 
-      // this.countUp(stat);
-    });
+    // only run the animation after data is loaded from db, not initial mount
+    if (this.stats.words !== null && this.stats.words !== undefined) {
+      const countElements = document.querySelectorAll('.count-up');
+      countElements.forEach((el) => {
+        this.countUp(el);
 
-    const countElements = document.querySelectorAll('.count-up');
-    countElements.forEach(() => {
-      let frame = 0;
-      const counter = setInterval(() => {
-        console.log(frame);
-        frame += 1;
-        if (frame === 10) {
-          clearInterval(counter);
-        }
-      }, 1000);
-      // animateCount(el);
-    });
+        // countUp(el);
+      });
+    }
   },
   methods: {
-    countUp(prop) {
-      console.log(this.stats[prop]);
-      this.stats[prop] = 0;
+    countUp(el) {
+      const endValue = parseInt(el.dataset.countupvalue, 10);
 
-      let count = 0;
-      // const frameDuration = 2000 / 60;
-      const counter = setInterval(() => {
-        console.log(this.stats[prop]);
+      let currentFrame = 0;
+      const duration = 1000;
+      const frameDuration = 1000 / 24;
+      const totalFrames = Math.round(duration / frameDuration);
+      const easeFunction = (x) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2);
 
-        count += 1;
-        if (count === 10) {
-          clearInterval(counter);
+      const obj = el;
+      const timer = setInterval(() => {
+        currentFrame += 1;
+        const progress = easeFunction(currentFrame / totalFrames);
+        const currentCount = Math.round(endValue * progress);
+
+        if (parseInt(obj.innerHTML, 10) !== currentCount) {
+          obj.innerHTML = currentCount;
         }
-      }, 1000);
-      // console.log(counter);
+
+        if (currentFrame === totalFrames) {
+          clearInterval(timer);
+        }
+      }, frameDuration);
     },
   },
 };
