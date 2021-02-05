@@ -61,6 +61,7 @@ export default {
     logout(e) {
       e.preventDefault();
       this.$store.dispatch('logout');
+      this.$router.push('/');
     },
     login(e) {
       e.preventDefault();
