@@ -34,7 +34,7 @@
             </ul>
           </li>
           <li v-else>
-            <a href="#" class="btn btn-secondary" @click="authModal">
+            <a href="#" @click="authModal">
               Login or Register
             </a>
           </li>
@@ -61,6 +61,7 @@ export default {
     logout(e) {
       e.preventDefault();
       this.$store.dispatch('logout');
+      this.$router.push('/');
     },
     login(e) {
       e.preventDefault();

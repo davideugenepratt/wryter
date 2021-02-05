@@ -1,12 +1,10 @@
 const axios = require('axios').default;
 const Cookies = require('js-cookie');
 
-const register = (username, password) => {
-  axios.post(`${process.env.VUE_APP_API_ROOT}/auth/register`, {
-    username,
-    password,
-  });
-};
+const register = (username, password) => axios.post(`${process.env.VUE_APP_API_ROOT}/auth/register`, {
+  username,
+  password,
+});
 
 const login = (username, password) => {
   const promise = new Promise((resolve, reject) => {

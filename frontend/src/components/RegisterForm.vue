@@ -62,6 +62,7 @@ export default {
     handleSubmit(e) {
       // prevent from page refresh;
       e.preventDefault();
+      const self = this;
       // initialize empty errors string;
       this.errors = [];
       // validate passwords and email
@@ -81,7 +82,15 @@ export default {
       const { $ } = window;
 
       authController.register(this.username, this.password).then(() => {
-        $('#authModal').modal('hide');
+        authController.login(this.username, this.password).then(() => {
+          self.$store.dispatch('login');
+          self.$router.push('/');
+          $('#authModal').modal('hide');
+        }, () => {
+          this.responseError = true;
+        });
+      }, (error) => {
+        this.errors.push(error.response.data.errorMessage);
       });
     },
     validateEmail() {

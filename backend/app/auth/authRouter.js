@@ -5,16 +5,33 @@ var passport = require('passport');
 var jwt = require('jsonwebtoken');
 var statsController = require('../userStats/statsController');
 
-let register = function (req, res, next) {
-  console.log(req.body);
-  if (!validatePassword(req.body.password)) {
-    console.error('invalid password');
+
+let register = function(req, res, next) {
+  let errorMessage = 'There was an error processing your request.';
+  let errorReason = 'ERROR';
+
+  if (!validatePassword(req.body.password)){
+    errorMessage = 'Invalid password.';
+    errorReason = 'INVALIDPASSWORD';
+    res.status(error.code).json({errorMessage, errorReason});
     return;
   }
 
   var user = new User({
-    username: req.body.username,
-    password: req.body.password,
+    'username': req.body.username,
+    'password': req.body.password
+  });
+  
+  var result = User.createUser(user).then(function(response){
+    res.json(response);
+  }).catch(function(error){    
+    // TODO: Probably should use an enum here eventually; moving on for now.
+    if (error.error.code === 11000) {
+      errorMessage = 'This email is already in use.';
+      errorReason = 'EMAILEXISTS';
+    }
+
+    res.status(error.code).json({errorMessage, errorReason});
   });
 
   var result = User.createUser(user)
