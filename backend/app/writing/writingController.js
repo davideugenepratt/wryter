@@ -1,6 +1,7 @@
 // might have to require mongoose to work var Writing = require('./writingsModel');
 const { default: slugify } = require('slugify');
 let Writing = require('./writingModel');
+var statsController = require('../userStats/statsController');
 
 let createWriting = function (req, res) {
   const title = req.body.text.split(' ').slice(0, 3).join(' ');
@@ -18,6 +19,7 @@ let createWriting = function (req, res) {
     .then((response) => {
       res.json(response);
     })
+    .then(statsController.updateStats(req.user.username))
     .catch((err) => {
       res.status(err.code).json(err);
     });
@@ -28,7 +30,6 @@ let getAllWritings = function (req, res) {
     .then((writings) => {
       res.json({
         writings,
-        stats: {},
       });
     })
     .catch((err) => {
